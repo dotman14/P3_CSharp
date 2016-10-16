@@ -12,7 +12,7 @@ namespace P3_oyedotunOyesanmi
             Console.WriteLine("Option 3) Search Dataset");
             Console.WriteLine("Option 4) Display Dataset Count");
             Console.WriteLine("Option 5) Exit");
-            Console.WriteLine("------------------------------------ \n");
+            Console.WriteLine("------------------------------------\n");
         }
     }
 }
