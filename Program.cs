@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace P3_oyedotnOyesanmi
 {
-    internal class MainClass
+    class MainClass
     {
         public static void Main(string[] args)
         {
@@ -10,10 +11,23 @@ namespace P3_oyedotnOyesanmi
             var data = new CsvFileReader();
 
 
-            Console.WriteLine(data.GetContent()[0].Length);
+            //Console.WriteLine(data.Content[0].Length);
 
-            //for(var i = 0; i < data.GetContent()[2].Length; i++)
-            //    Console.WriteLine(data.GetContent()[2][i]);
+            var cont = data.Content;
+            var len = cont[2].Length;
+            List<string[]> list = new List<string[]>(cont);
+
+            //foreach (var t in list)
+            //    foreach (var t1 in t)
+            //        Console.WriteLine(t1);
+
+            //foreach (var i in list)
+            //{
+            //    Console.WriteLine(i[2]);
+            //}
+
+                for (var ii = 0; ii < len; ii++)
+                    Console.WriteLine(list[2][ii]);
 
 
             //int getChar;
