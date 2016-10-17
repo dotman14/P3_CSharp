@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CSVFileReader.cs" />
+    <Compile Include="ReadCSV.cs" />
     <Compile Include="Display.cs" />
     <Compile Include="ElectionInfo.cs" />
     <Compile Include="Program.cs" />

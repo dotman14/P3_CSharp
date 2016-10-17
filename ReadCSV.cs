@@ -4,7 +4,7 @@ using System.Net;
 
 namespace P3_oyedotnOyesanmi
 {
-    class CsvFileReader
+    class ReadCSV
     {
         private string _content;
         public readonly List<string[]> List = new List<string[]>();
@@ -15,7 +15,7 @@ namespace P3_oyedotnOyesanmi
             {
                 using (var url = new WebClient())
                 {
-                    _content = url.DownloadString("https://docs.google.com/spreadsheets/d/1z9OuJhYPDTsLCVeNzt069ChITXlgKdNwf7Wma7qhfxY/pub?output=csv");
+                    _content = url.DownloadString("https://docs.google.com/spreadsheets/d/1DDhAd98p5RwXqvV53P2YvaujIQEg28HjeXasrCge9Qo/pub?output=csv");
                 }
 
                 var urlArr = _content.Split('\n');

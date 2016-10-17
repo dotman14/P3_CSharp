@@ -7,29 +7,29 @@ namespace P3_oyedotnOyesanmi
     {
         public static void Main(string[] args)
         {
+          
+
+            var data = new ReadCSV();
+
+            var list = new List<string[]>(data.Content);
+            Console.WriteLine(list.Count);
+            var len = list[3].Length;
+                  
+                for (var ii = 0; ii < len; ii++)
+                    Console.WriteLine(list[5][ii]);
+
+
+
+
+
+
+
+
+
             //var response = false;
-            var data = new CsvFileReader();
-
-
-            //Console.WriteLine(data.Content[0].Length);
-
-            var cont = data.Content;
-            var len = cont[2].Length;
-            List<string[]> list = new List<string[]>(cont);
-
             //foreach (var t in list)
             //    foreach (var t1 in t)
             //        Console.WriteLine(t1);
-
-            //foreach (var i in list)
-            //{
-            //    Console.WriteLine(i[2]);
-            //}
-
-                for (var ii = 0; ii < len; ii++)
-                    Console.WriteLine(list[2][ii]);
-
-
             //int getChar;
             //while (response == false)
             //{
