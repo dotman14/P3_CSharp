@@ -15,5 +15,11 @@ namespace P3_oyedotnOyesanmi
             Console.WriteLine("Option 5) Exit");
             Console.WriteLine("------------------------------------\n");
         }
+
+        public static void SearchDataOptions()
+        {          
+            Console.WriteLine("Option 0) Search by County");
+            Console.WriteLine("Option 1) Search by Party");
+        }
     }
 }

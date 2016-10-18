@@ -7,41 +7,43 @@ namespace P3_oyedotnOyesanmi
     {
         public static void Main(string[] args)
         {
-          
-
-            var data = new ReadCSV();
+            var data = new ReadCsv();
 
             var list = new List<string[]>(data.Content);
-            Console.WriteLine(list.Count);
             var len = list[3].Length;
-                  
-                for (var ii = 0; ii < len; ii++)
-                    Console.WriteLine(list[5][ii]);
+
+            for (var ii = 0; ii < len; ii++)
+                Console.WriteLine(list[3][ii]);
+
+
+            //foreach (var t in list)
+            //    foreach (var t1 in t)
+            //        Console.WriteLine(t1);
 
 
 
 
+            //var e = new ElectionDataSet();
 
 
 
 
 
             //var response = false;
-            //foreach (var t in list)
-            //    foreach (var t1 in t)
-            //        Console.WriteLine(t1);
-            //int getChar;
+
             //while (response == false)
             //{
             //    Display.GetMenu();
 
             //    Console.Write("Select option: ");
-            //    getChar = Convert.ToInt16(Console.ReadLine());
+            //    int getChar = Convert.ToInt16(Console.ReadLine());
 
             //    switch (getChar)
             //    {
             //        case 0:
             //            Console.Write("Option 0\n");
+            //            Console.WriteLine(e.GetSize);
+
             //            break;
             //        case 1:
             //            Console.Write("Option 1\n\n");
