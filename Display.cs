@@ -4,7 +4,7 @@ namespace P3_oyedotnOyesanmi
 {
     public static class Display
     {
-        public static void GetMenu()
+        public static void MainMenu()
         {
             Console.WriteLine("------------ Menu Display ------------");
             Console.WriteLine("Option 0) Clear and Load Dataset ");
@@ -16,10 +16,12 @@ namespace P3_oyedotnOyesanmi
             Console.WriteLine("------------------------------------\n");
         }
 
-        public static void SearchDataOptions()
+        public static void SearchByOptions()
         {          
-            Console.WriteLine("Option 0) Search by County");
-            Console.WriteLine("Option 1) Search by Party");
+            Console.WriteLine("1) Search by Name");
+            Console.WriteLine("2) Search by Party");
+            Console.WriteLine("3) Search by State");
+            Console.WriteLine("4) Search by County");
         }
     }
 }
