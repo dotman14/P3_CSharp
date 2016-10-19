@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace P3_oyedotnOyesanmi
 {
@@ -7,13 +6,14 @@ namespace P3_oyedotnOyesanmi
     {
         public static void Main(string[] args)
         {
-            var data = new ReadCsv();
 
-            var list = new List<string[]>(data.Content);
-            var len = list[3].Length;
+          
 
-            for (var ii = 0; ii < len; ii++)
-                Console.WriteLine(list[3][ii]);
+            var getdata = new ElectionDataSet();
+            foreach (var v in getdata.Data)
+            {
+                Console.WriteLine(v);
+            }
 
 
             //foreach (var t in list)
@@ -21,13 +21,7 @@ namespace P3_oyedotnOyesanmi
             //        Console.WriteLine(t1);
 
 
-
-
             //var e = new ElectionDataSet();
-
-
-
-
 
             //var response = false;
 

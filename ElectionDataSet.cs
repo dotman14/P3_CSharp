@@ -1,32 +1,27 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace P3_oyedotnOyesanmi
 {
     class ElectionDataSet
     {
-        private List<ElectionInfo> _election = new List<ElectionInfo>();
-        private List<string> rawElection = new List<string>();
-
-        //public ElectionDataSet()
-        //{
-        //    rawElection = 
-        //}
-
-        public void Insert(ElectionInfo electionInfoObj)
+        public ElectionDataSet()
         {
-            _election.Add(electionInfoObj);
+            Data = new ReadCsv().Content.Select(x => new ElectionData(x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8])).ToList();
         }
 
-        public int GetSize
+        public List<ElectionData> Data { get; }
+
+        public int Count => Data.Count;
+
+        public void Clear()
         {
-            get { return _election.Count; }
+            Data.Clear();
         }
 
-        private void ClearCollection()
+        public void Add(ElectionData election)
         {
-            _election.Clear();
+            Data.Add(election);
         }
-
-
     }
 }

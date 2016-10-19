@@ -50,7 +50,7 @@
     <Compile Include="ElectionDataSet.cs" />
     <Compile Include="ReadCSV.cs" />
     <Compile Include="Display.cs" />
-    <Compile Include="ElectionInfo.cs" />
+    <Compile Include="ElectionData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
