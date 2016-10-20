@@ -9,12 +9,12 @@ namespace P3_oyedotnOyesanmi
         public void Search()
         {
             Display.SearchByOptions();
-            Console.Write("Search data by: ");
+            Console.Write("\nSearch data by: ");
             var searchByVariable = Console.ReadKey().KeyChar;
             switch (searchByVariable)
             {
                 case '1':
-                    Console.Write("\nName of Office: ");
+                    Console.Write("\nType of Election: ");
                     var office = Console.ReadLine();
                     SearchByOffice(office);
                     break;
@@ -38,14 +38,14 @@ namespace P3_oyedotnOyesanmi
          * County and State should be unique.
          */
 
-        public void Add(string office, string state, string date, string county, string rVote, string rCand, string dVote, string dCand)
+        public void Add(string office, string state, string date, string county, int rVote, string rCand, int dVote, string dCand)
         {
             var result =
                 Data.Where(results => results.Area  == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county.ToLower())).
                      Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state.ToLower()));
             if (!result.Any())
             {
-                Data.Add(new ElectionData(office, state, date, county, rVote, rCand, dVote, dCand));
+                Data.Add(new ElectionData(office, state, date, county, (rVote + dVote), Convert.ToInt32(rVote), rCand, Convert.ToInt32(dVote), dCand));
             }
             else
             {
@@ -84,25 +84,5 @@ namespace P3_oyedotnOyesanmi
             }
         }
 
-        public void SearchByYear(string year)
-        {
-            var result =
-                Data.Where(results => results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(year.ToLower()));
-            foreach (var get in result)
-            {
-                Console.WriteLine(get);
-            }
-        }
-
-        public void SearchByCandidate(string candidate)
-        {
-            var result =
-                Data.Where(results =>
-                        results.Democrat == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(candidate.ToLower()));
-            foreach (var get in result)
-            {
-                Console.WriteLine(get);
-            }
-        }     
     }
 }
