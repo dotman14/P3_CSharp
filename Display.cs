@@ -19,8 +19,7 @@ namespace P3_oyedotnOyesanmi
         public static void SearchByOptions()
         {
             //Console.WriteLine("");
-            Console.WriteLine("1. Name");
-            Console.WriteLine("2. Party");
+            Console.WriteLine("1. Office");
             Console.WriteLine("3. State");
             Console.WriteLine("4. County");
         }
