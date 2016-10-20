@@ -29,9 +29,12 @@ namespace P3_oyedotnOyesanmi
 
         protected internal void ShowData()
         {
+            int count = 0;
+            WriteLine("{0,4}{1,11}{2,20}{3,10}{4,15}{5,8}{6,8}{7,16}{8,8}{9,16}","N-","Office","State","Date","Area","Total","Rep-Vot","Rep-Candidate","Dem-Vot","Dem-Candidate");
             foreach (var i in Data)
-            {
-                WriteLine(i);
+            {       
+                count++;
+                WriteLine("{0,4}{1}",count,i);
             }
         }
 
