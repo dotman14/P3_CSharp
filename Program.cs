@@ -6,26 +6,26 @@ namespace P3_oyedotnOyesanmi
     {
         public static void Main(string[] args)
         {
-            var getdata = new ElectionDataSet();
             var manipulate = new DataManipulation();
-            var response = false;
+            var response = false;            
 
             while (response == false)
             {
                 Display.MainMenu();
+                
 
                 Console.Write("Select option: ");
-                int getChar = Convert.ToInt16(Console.ReadLine());
+                int getResponse = Convert.ToInt16(Console.ReadLine());
 
-                switch (getChar)
+                switch (getResponse)
                 {
                     case 0:
-                        Console.Write("Option 0\n");
-                        getdata.ShowData();
+                        Console.Write("Dataset Intitilized\n");
+                        manipulate.ShowData();
 
                         break;
                     case 1:
-                        Console.Write("Option 1\n\n");
+                        manipulate.Add("Senate", "Senate", "Senate", "Senate", "Senate", "Senate", "Senate", "Senate"); //test data
                         break;
                     case 2:
                         Console.Write("Option 2\n\n ");
@@ -34,7 +34,7 @@ namespace P3_oyedotnOyesanmi
                         manipulate.Search();
                         break;
                     case 4:
-                        Console.Write("Option 4\n\n");
+                        Console.Write("Dataset count {0}\n\n", manipulate.Count);
                         break;
                     case 5:
                         response = true;

@@ -4,86 +4,107 @@ using System.Globalization;
 
 namespace P3_oyedotnOyesanmi
 {
-    class DataManipulation
+    class DataManipulation : ElectionDataSet
     {
         public void Search()
         {
             Display.SearchByOptions();
-            Console.WriteLine("Search data by: ");
-            var searchBy = Console.ReadKey().KeyChar;
-            switch (searchBy)
+            Console.Write("Search data by: ");
+            var searchByVariable = Console.ReadKey().KeyChar;
+            switch (searchByVariable)
             {
                 case '1':
+                    Console.Write("\nName of Candidate: ");
                     var name = Console.ReadLine();
-                    FilterByCandidate(name);
+                    SearchByCandidate(name);
                     break;
                 case '2':
+                    Console.Write("\nName of Office: ");
                     var office = Console.ReadLine();
-                    FilterByOffice(office);
+                    SearchByOffice(office);
                     break;
                 case '3':
-                    Console.WriteLine("Enter name of State");
+                    Console.Write("\nName of State: ");
                     var state = Console.ReadLine();
-                    FilterByState(state);
+                    SearchByState(state);
                     break;
                 case '4':
+                    Console.Write("\nName of County: ");
                     var county = Console.ReadLine();
-                    FilterByCounty(county);
+                    SearchByCounty(county);
                     break;
                 default:
-                    Console.WriteLine("This option does not exist");
+                    Console.WriteLine("\nThis option does not exist");
                     break;
             }
         }
 
-        public void FilterByCounty(string county)
+        //President Kansas  20121106        Stafford        1839    1385    Romney W Mitt   404     Obama Barack H
+
+        public void Add(string office, string state, string date, string county, string rVote, string rCand, string dVote, string dCand)
         {
-            var data = new ElectionDataSet().Data;
-            var result = data.Where(results => results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county.ToLower()));
+            var result =
+                Data.Where(results => results.Area  == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county.ToLower())).
+                     Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state.ToLower()));
+            if (!result.Any())
+            {
+                Data.Add(new ElectionData(office, state, date, county, rVote, rCand, dVote, dCand));
+            }
+            else
+            {
+                Console.WriteLine("Data already exist");
+            }
+        }
+
+        public void SearchByCounty(string county)
+        {
+            var result = Data.Where(results => results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county.ToLower()));
             foreach (var get in result)
             {
                 Console.WriteLine(get);
             }
         }
 
-        public void FilterByState(string state)
+        public void SearchByState(string state)
         {
-            var data = new ElectionDataSet().Data;
-            var result = data.Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state.ToLower()));
+            var result = Data.Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state.ToLower()));
             foreach (var get in result)
             {
                 Console.WriteLine(get);
             }
         }
 
-        public void FilterByOffice(string office)
+        public void SearchByOffice(string office)
         {
-            var data = new ElectionDataSet().Data;
-            var result = data.Where(results => results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office.ToLower()));
+            var result =
+                Data.Where(
+                    results => results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office.ToLower()));
             foreach (var get in result)
             {
                 Console.WriteLine(get);
             }
         }
 
-        public void FilterByCandidate(string candidate)
+        public void SearchByYear(string year)
         {
-            var data = new ElectionDataSet().Data;
-            var result = data.Where(results => results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(candidate.ToLower()));
+            var result = Data.Where(results => results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(year.ToLower()));
             foreach (var get in result)
             {
                 Console.WriteLine(get);
             }
         }
 
-        public void FilterByYear(string year)
+        public void SearchByCandidate(string candidate)
         {
-            var data = new ElectionDataSet().Data;
-            var result = data.Where(results => results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(year.ToLower()));
+            var result =
+                Data.Where(results =>
+                        results.Democrat == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(candidate.ToLower()));
             foreach (var get in result)
             {
                 Console.WriteLine(get);
             }
         }
+
+        
     }
 }

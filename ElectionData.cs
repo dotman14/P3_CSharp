@@ -4,19 +4,28 @@
     {
         public override string ToString()
         {
-            return $"{Office} {State} {Date} {Area} {Total} {Republican} {RepublicanVote} {Democrat} {DemocratVote} ";
+            return $"{Office}\t{State}\t{Date}\t{Area}\t{Total}\t{Republican}\t{RepublicanVote}\t{Democrat}\t{DemocratVote} ";
         }
 
-        public ElectionData(
-            string office, string state,string date, string county, string total, 
-            string rCandidate, string rVote,string dCandidate, string dVote
-        )
+        public ElectionData(string office, string state,string date, string county, string total, string rCandidate, string rVote,string dCandidate, string dVote)
         {
             Office = office;
             State = state;
             Date = date;
             Area = county;
             Total = total;
+            Republican = rCandidate;
+            RepublicanVote = rVote;
+            Democrat = dCandidate;
+            DemocratVote = dVote;
+        }
+
+        public ElectionData(string office, string state, string date, string county, string rCandidate, string rVote, string dCandidate, string dVote)
+        {
+            Office = office;
+            State = state;
+            Date = date;
+            Area = county;
             Republican = rCandidate;
             RepublicanVote = rVote;
             Democrat = dCandidate;
