@@ -14,21 +14,16 @@ namespace P3_oyedotnOyesanmi
             switch (searchByVariable)
             {
                 case '1':
-                    Console.Write("\nName of Candidate: ");
-                    var name = Console.ReadLine();
-                    SearchByCandidate(name);
-                    break;
-                case '2':
                     Console.Write("\nName of Office: ");
                     var office = Console.ReadLine();
                     SearchByOffice(office);
                     break;
-                case '3':
+                case '2':
                     Console.Write("\nName of State: ");
                     var state = Console.ReadLine();
                     SearchByState(state);
                     break;
-                case '4':
+                case '3':
                     Console.Write("\nName of County: ");
                     var county = Console.ReadLine();
                     SearchByCounty(county);
@@ -39,7 +34,9 @@ namespace P3_oyedotnOyesanmi
             }
         }
 
-        //President Kansas  20121106        Stafford        1839    1385    Romney W Mitt   404     Obama Barack H
+        /*
+         * County and State should be unique.
+         */
 
         public void Add(string office, string state, string date, string county, string rVote, string rCand, string dVote, string dCand)
         {
@@ -58,7 +55,8 @@ namespace P3_oyedotnOyesanmi
 
         public void SearchByCounty(string county)
         {
-            var result = Data.Where(results => results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county.ToLower()));
+            var result =
+                Data.Where(results => results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county.ToLower()));
             foreach (var get in result)
             {
                 Console.WriteLine(get);
@@ -67,7 +65,8 @@ namespace P3_oyedotnOyesanmi
 
         public void SearchByState(string state)
         {
-            var result = Data.Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state.ToLower()));
+            var result =
+                Data.Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state.ToLower()));
             foreach (var get in result)
             {
                 Console.WriteLine(get);
@@ -87,7 +86,8 @@ namespace P3_oyedotnOyesanmi
 
         public void SearchByYear(string year)
         {
-            var result = Data.Where(results => results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(year.ToLower()));
+            var result =
+                Data.Where(results => results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(year.ToLower()));
             foreach (var get in result)
             {
                 Console.WriteLine(get);
@@ -103,8 +103,6 @@ namespace P3_oyedotnOyesanmi
             {
                 Console.WriteLine(get);
             }
-        }
-
-        
+        }     
     }
 }
