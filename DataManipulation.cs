@@ -131,9 +131,9 @@ namespace P3_oyedotnOyesanmi
                      Where(results => state != null && results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state.ToLower()));
             if (!result.Any())
             {
-                int vote = republicanVotes + democraticVotes;
-                ElectionData newElec = new ElectionData(office, state, date, area, vote, republicanVotes, republicanCandidate, democraticVotes, democraticCandidate);
-                Data.Add(newElec);
+                var vote = republicanVotes + democraticVotes;
+                var newElec = new ElectionData(office, state, date, area, vote, republicanVotes, republicanCandidate, democraticVotes, democraticCandidate);
+                Add(newElec);
                 Console.WriteLine("\n Input Added\n");
                 Console.WriteLine(newElec.ToString());
             }
