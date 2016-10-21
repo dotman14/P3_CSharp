@@ -13,9 +13,15 @@ namespace P3_oyedotnOyesanmi
             {
                 Display.MainMenu();
 
-
+                int getResponse = 10;
                 Console.Write("Select option: ");
-                int getResponse = Convert.ToInt32(Console.ReadLine());
+                try {
+                    getResponse = Convert.ToInt32(Console.ReadLine());
+                } catch (Exception ex){
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine("\n**Wrong option - Must input an number (0-5)**");
+                }
+                
 
                 switch (getResponse)
                 {
@@ -24,7 +30,7 @@ namespace P3_oyedotnOyesanmi
                         manipulate.ShowData();
                         break;
                     case 1:
-                        manipulate.Add();
+                        manipulate.Add(); 
                         break;
                     case 2:
                         manipulate.Modify();
@@ -39,7 +45,7 @@ namespace P3_oyedotnOyesanmi
                         response = true;
                         break;
                     default:
-                        Console.Write("Wrong option\n\n");
+                        Console.Write("**Wrong option**\n\n");
                         break;
                 }
             }

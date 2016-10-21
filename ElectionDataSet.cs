@@ -12,7 +12,7 @@ namespace P3_oyedotnOyesanmi
         public ElectionDataSet()
         {
             if (Data != null)
-                Clear();
+                Data.Clear();
             /* This constructor uses chaining.
              * Same could be achieved by:
              * 1. Creating a local ReadCsv object
