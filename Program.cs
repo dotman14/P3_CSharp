@@ -16,7 +16,7 @@ namespace P3
                 {
                     Display.MainMenu();
 
-                    int getResponse = 10; //initialize to an invalid value
+                    var getResponse = 10; //initialize to an invalid value
                     Console.Write("Select option: ");
                     try
                     {
@@ -29,8 +29,6 @@ namespace P3
                         Console.WriteLine(ex.Message);
                         Console.WriteLine("\n**Wrong option - Must input an number (0-5)**");
                     }
-
-
                     switch (getResponse) //return the action corresponding to the choice
                     {
                         case 0: //initializes and shows data
@@ -65,4 +63,4 @@ namespace P3
             }
         }
     }
-    }
+}

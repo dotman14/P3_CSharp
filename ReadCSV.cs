@@ -24,10 +24,9 @@ namespace P3
             {
                 using (var url = new WebClient())
                 {
-
                     _content =
                         url.DownloadString(
-                            "https://docs.google.com/spreadsheets/d/1SlWCDS02UWqHRvSUJk3mFgcAStpaLRBqi2ZIA58TFE/pub?output=csv");
+                            "https://docs.google.com/spreadsheets/d/1SlWCDS02UWqHRvSUJk3mFgcAStpaXLRBqi2ZIA58TFE/pub?output=csv");
                 }
 
                 //Split raw election data into rows
