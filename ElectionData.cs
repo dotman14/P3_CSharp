@@ -4,7 +4,7 @@
     {
         public override string ToString()
         {
-            return $"{Office,8}{State,20}{Date,10}{Area,15}{Total,8}{Republican,8}{RepublicanVote,16}{Democrat,8}{DemocratVote,16} ";
+            return $"{Office,8}{State,20}{Date,10}{Area,15}{Total,8}{RepublicanVote,16}{Republican,8}{DemocratVote,16}{Democrat,8} ";
         }
 
         public ElectionData(
