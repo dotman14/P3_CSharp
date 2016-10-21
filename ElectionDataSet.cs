@@ -6,6 +6,8 @@ namespace P3_oyedotnOyesanmi
 {
     class ElectionDataSet
     {
+        protected List<ElectionData> Data { get; }
+
         public ElectionDataSet()
         {
             if (Data != null)
@@ -18,8 +20,6 @@ namespace P3_oyedotnOyesanmi
              */
             Data = new ReadCsv().Content.Select(x => new ElectionData(x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8])).ToList();
         }
-
-        protected List<ElectionData> Data { get; }
 
         protected internal int Count => Data.Count;
 
