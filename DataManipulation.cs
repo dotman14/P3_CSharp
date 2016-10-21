@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Globalization;
+using System.Linq;
 
-namespace P3_oyedotnOyesanmi
+namespace P3
 {
     class DataManipulation : ElectionDataSet
     {
@@ -157,9 +157,9 @@ namespace P3_oyedotnOyesanmi
                      Where(results => state != null && results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state.ToLower()));
             if (!result.Any())
             {
-                int vote = republicanVotes + democraticVotes;
-                ElectionData newElec = new ElectionData(office, state, date, area, vote, republicanVotes, republicanCandidate, democraticVotes, democraticCandidate);
-                Data.Add(newElec);
+                var vote = republicanVotes + democraticVotes;
+                var newElec = new ElectionData(office, state, date, area, vote, republicanVotes, republicanCandidate, democraticVotes, democraticCandidate);
+                Add(newElec);
                 Console.WriteLine("\n Input Added\n");
                 Console.WriteLine(newElec.ToString());
             }
@@ -173,16 +173,18 @@ namespace P3_oyedotnOyesanmi
         {
             var index = GetIndex(state, county, office);
             var beforeUpdate = GetSingleRow(state, county, office);
+
             var afterUpdate = new ElectionData(
-                beforeUpdate.Office,
-                beforeUpdate.State,
-                beforeUpdate.Date,
-                beforeUpdate.Area,
-                rVotes + dVotes,
-                rVotes,
-                beforeUpdate.Republican,
-                dVotes,
-                beforeUpdate.Democrat);
+                                                beforeUpdate.Office,
+                                                beforeUpdate.State,
+                                                beforeUpdate.Date,
+                                                beforeUpdate.Area,
+                                                rVotes + dVotes,
+                                                rVotes,
+                                                beforeUpdate.Republican,
+                                                dVotes,
+                                                beforeUpdate.Democrat
+                                              );
             Data[index] = afterUpdate;
         }
     }

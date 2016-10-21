@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace P3_oyedotnOyesanmi
+namespace P3
 {
     class ElectionDataSet
     {
@@ -12,7 +12,7 @@ namespace P3_oyedotnOyesanmi
         public ElectionDataSet()
         {
             if (Data != null)
-                Data.Clear();
+                Clear();
             /* This constructor uses chaining.
              * Same could be achieved by:
              * 1. Creating a local ReadCsv object
@@ -66,10 +66,10 @@ namespace P3_oyedotnOyesanmi
             return index;
         }
 
-        public void SearchByCounty(string county)
+        protected void SearchByCounty(string county)
         {
             var result =
-                Data.Where(results => results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county.ToLower()));
+                Data.Where(results => results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county.ToLower())).ToList();
 
             if (result.Count() != 0)
             {
@@ -82,10 +82,10 @@ namespace P3_oyedotnOyesanmi
                 Console.WriteLine("\n**No County named {0}**", county);
         }
 
-        public void SearchByState(string state)
+        protected void SearchByState(string state)
         {
             var result =
-                Data.Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state.ToLower()));
+                Data.Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state.ToLower())).ToList();
 
             if (result.Count() != 0)
             {
@@ -100,11 +100,11 @@ namespace P3_oyedotnOyesanmi
 
         }
 
-        public void SearchByOffice(string office)
+        protected void SearchByOffice(string office)
         {
             var result =
                 Data.Where(
-                    results => results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office.ToLower()));
+                    results => results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office.ToLower())).ToList();
             if (result.Count() != 0)
             {
                 foreach (var get in result)

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net;
 
-namespace P3_oyedotnOyesanmi
+namespace P3
 {
     class ReadCsv
     {

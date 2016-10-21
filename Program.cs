@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace P3_oyedotnOyesanmi
+namespace P3
 {
     class MainClass
     {
@@ -21,7 +21,7 @@ namespace P3_oyedotnOyesanmi
                     Console.WriteLine(ex.Message);
                     Console.WriteLine("\n**Wrong option - Must input an number (0-5)**");
                 }
-                
+
 
                 switch (getResponse)                    //return the action corresponding to the choice
                 {
@@ -29,6 +29,7 @@ namespace P3_oyedotnOyesanmi
                         Console.Write("Dataset Intitilized\n");
                         manipulate.ShowData();
                         break;
+
                     case 1:                             //add a new input the data
                         manipulate.Add(); 
                         break;
