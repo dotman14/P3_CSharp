@@ -1,5 +1,7 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using static System.Console;
 
@@ -37,6 +39,16 @@ namespace P3_oyedotnOyesanmi
                 count++;
                 WriteLine("{0,4}{1}",count,i);
             }
+        }
+
+        public bool CheckUniqueData(string state, string county)
+        {
+            var result =
+                Data.Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state) &&
+                                      results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county));
+
+            return result.Any();
+
         }
 
     }

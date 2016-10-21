@@ -37,7 +37,14 @@ namespace P3_oyedotnOyesanmi
 
         public void Modify()
         {
-            Display.CountyToModify();
+            Console.Write("\nSelect State: ");
+            var state = Console.ReadLine();
+            Console.Write("Select County: ");
+            var county = Console.ReadLine();
+            if (!CheckUniqueData(state, county))
+                Console.WriteLine("There's no election data for {0} County, {1}", county, state);
+            else
+                Console.WriteLine("You can edit data");
         }
 
         /*

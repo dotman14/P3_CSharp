@@ -34,7 +34,7 @@ namespace P3_oyedotnOyesanmi
 
         public static void CountyToModify()
         {
-            Console.WriteLine("\nChoose the State and County you want to modify data");
+            Console.WriteLine("\nYou can modify the following data: ");
             Console.WriteLine("1. County");
             Console.WriteLine("2. State");
         }
