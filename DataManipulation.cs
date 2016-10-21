@@ -21,16 +21,19 @@ namespace P3
                 case '1':
                     Console.Write("\nType of Election: ");
                     var office = Console.ReadLine();
+                    Display.GetMainHeader();
                     SearchByOffice(office);
                     break;
                 case '2':
                     Console.Write("\nName of State: ");
                     var state = Console.ReadLine();
+                    Display.GetMainHeader();
                     SearchByState(state);
                     break;
                 case '3':
                     Console.Write("\nName of County: ");
                     var county = Console.ReadLine();
+                    Display.GetMainHeader();
                     SearchByCounty(county);
                     break;
                 default:
@@ -38,7 +41,6 @@ namespace P3
                     break;
             }
         }
-
         /*Modify method
          * to modify the user must input 3 information to retrieve the entry he wants to modify:
          * State, County and kind of election (office). The association of these 3 criteria 
@@ -64,18 +66,24 @@ namespace P3
                 do {
                     badInput = false;
                     Console.WriteLine("\nAt this time, you are only allowed to edit number of votes: ");
+                    Display.GetMainHeader();
                     Console.WriteLine(GetSingleRow(state, county, office));
                     try
                     {
                         Console.Write("\nNew Votes for Republican Party: ");
                         newRepublicanVotes = Convert.ToInt32(Console.ReadLine());
+                        if (newRepublicanVotes < 0)
+                            throw new ArgumentOutOfRangeException("Republican Votes");
+
                         Console.Write("New Votes for Democratic Party: ");
                         newDemocraticVotes = Convert.ToInt32(Console.ReadLine());
+
+                        if (newDemocraticVotes < 0)
+                            throw new ArgumentOutOfRangeException("Democratic Votes");
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine("\n{0}",ex.Message);
-                        Console.WriteLine("**Number of votes must be of type numeric**");
                         badInput = true;
                     }
                 } while (badInput);
@@ -83,14 +91,13 @@ namespace P3
                 EditSingleElection(newRepublicanVotes, newDemocraticVotes, state, county, office);
 
                 Console.WriteLine("\n{0} election data for {1} County, {2} has been edited.", office, county, state);
+                Display.GetMainHeader();
                 Console.WriteLine(GetSingleRow(state, county, office));
             }
         }
-
         /*
          * County and State should be unique.
          */
-
         public void Add()
         {
             string office;
@@ -160,6 +167,7 @@ namespace P3
                 var newElec = new ElectionData(office, state, date, area, vote, republicanVotes, republicanCandidate, democraticVotes, democraticCandidate);
                 Add(newElec);
                 Console.WriteLine("\n Input Added\n");
+                Display.GetMainHeader();
                 Console.WriteLine(newElec.ToString());
             }
             else
@@ -167,7 +175,6 @@ namespace P3
                 Console.WriteLine("Data already exist");
             }
         }
-
         public void EditSingleElection(int rVotes, int dVotes, string state, string county, string office)
         {
             var index = GetIndex(state, county, office);

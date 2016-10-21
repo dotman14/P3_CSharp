@@ -19,7 +19,7 @@ namespace P3
              * 2. Call Content Property on the object...That returns a list of string arrays 
              * 3. Use LINQ to convert List<string[]> into List<ElectionData>
              */
-            Data = new ReadCsv().Content.Select(x => new ElectionData(x[0], x[1], x[2], x[3], Convert.ToInt32(x[4]), Convert.ToInt32(x[5]), x[6], Convert.ToInt32(x[7]), x[8])).ToList();
+            Data = new ReadCsv().Content.Select(x => new ElectionData(x[0], CultureInfo.CurrentCulture.TextInfo.ToTitleCase(x[1].ToLower()), x[2], x[3], Convert.ToInt32(x[4]), Convert.ToInt32(x[5]), x[6], Convert.ToInt32(x[7]), x[8])).ToList();
         }
 
         protected internal int Count => Data.Count;
@@ -30,12 +30,10 @@ namespace P3
 
         protected internal void ShowData()
         {
-            //int count = 0;
             Display.GetMainHeader();
             foreach (var i in Data)
             {
                 Console.WriteLine("{0}", i);
-                //count++;
 
             }
         }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net;
-
 namespace P3
 {
     class MainClass
@@ -20,14 +19,14 @@ namespace P3
                     Console.Write("Select option: ");
                     try
                     {
-                        //get the value from the user
                         getResponse = Convert.ToInt32(Console.ReadLine());
+                        if(!(getResponse >= 0 && getResponse <= 5))
+                            throw new ArgumentOutOfRangeException();                       
                     }
                     catch (Exception ex)
                     {
                         //check the value inputted
                         Console.WriteLine(ex.Message);
-                        Console.WriteLine("\n**Wrong option - Must input an number (0-5)**");
                     }
                     switch (getResponse) //return the action corresponding to the choice
                     {
@@ -50,9 +49,6 @@ namespace P3
                             break;
                         case 5: //exit
                             response = true;
-                            break;
-                        default: //bad input
-                            Console.Write("**Wrong option**\n\n");
                             break;
                     }
                 }
