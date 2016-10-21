@@ -25,7 +25,6 @@ namespace P3
                     }
                     catch (Exception ex)
                     {
-                        //check the value inputted
                         Console.WriteLine(ex.Message);
                     }
                     switch (getResponse) //return the action corresponding to the choice
@@ -35,19 +34,19 @@ namespace P3
                             manipulate.ShowData();
                             break;
 
-                        case 1: //add a new input the data
+                        case 1: 
                             manipulate.Add();
                             break;
-                        case 2: //modify an Row
+                        case 2: 
                             manipulate.Modify();
                             break;
-                        case 3: //search for an entry
+                        case 3: 
                             manipulate.Search();
                             break;
-                        case 4: //display the number of entry 
+                        case 4: 
                             Console.Write("Dataset count {0}\n\n", manipulate.Count);
                             break;
-                        case 5: //exit
+                        case 5: 
                             response = true;
                             break;
                     }

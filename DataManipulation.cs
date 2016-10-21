@@ -47,25 +47,29 @@ namespace P3
          * will always return a unique result.
          * The user is only allowed to modify the number of votes for democrat and republican.
          */
+
         public void Modify()
         {
             int newRepublicanVotes = 0, newDemocraticVotes = 0;
 
-
             Console.Write("\nSelect State: ");
             var state = Console.ReadLine();
+
             Console.Write("Select County: ");
             var county = Console.ReadLine();
+
             Console.Write("Select Office: ");
             var office = Console.ReadLine();
+
             if (!CheckUniqueData(state, county, office))
                 Console.WriteLine("There's no {0} election data for {1} County, {2}", office, county, state);
             else
             {
+                Console.WriteLine("\nAt this time, you are only allowed to edit number of votes: ");
                 bool badInput;
-                do {
+                do
+                {
                     badInput = false;
-                    Console.WriteLine("\nAt this time, you are only allowed to edit number of votes: ");
                     Display.GetMainHeader();
                     Console.WriteLine(GetSingleRow(state, county, office));
                     try
@@ -73,21 +77,21 @@ namespace P3
                         Console.Write("\nNew Votes for Republican Party: ");
                         newRepublicanVotes = Convert.ToInt32(Console.ReadLine());
                         if (newRepublicanVotes < 0)
-                            throw new ArgumentOutOfRangeException("Republican Votes");
+                            throw new ArgumentOutOfRangeException();
 
                         Console.Write("New Votes for Democratic Party: ");
                         newDemocraticVotes = Convert.ToInt32(Console.ReadLine());
 
                         if (newDemocraticVotes < 0)
-                            throw new ArgumentOutOfRangeException("Democratic Votes");
+                            throw new ArgumentOutOfRangeException();
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("\n{0}",ex.Message);
+                        Console.WriteLine("\n{0}", ex.Message);
                         badInput = true;
                     }
                 } while (badInput);
-         
+
                 EditSingleElection(newRepublicanVotes, newDemocraticVotes, state, county, office);
 
                 Console.WriteLine("\n{0} election data for {1} County, {2} has been edited.", office, county, state);
@@ -113,48 +117,50 @@ namespace P3
             do
             {
                 badInput = false;
-                Console.Write("Input the election office: ");
+                Console.Write("\nElection office: ");
                 office = Console.ReadLine();
 
-                Console.Write("Input the state name: ");
+                Console.Write("State name: ");
                 state = Console.ReadLine();
 
-                Console.Write("Input the date: ");
+                Console.Write("Date of Election: ");
                 date = Console.ReadLine();
 
-                Console.Write("Input the county name: ");
+                Console.Write("County name: ");
                 area = Console.ReadLine();
 
-                Console.Write("Input the number of republican voters: ");
+                Console.Write("Republican votes: ");
                 try
                 {
                     republicanVotes = Convert.ToInt32(Console.ReadLine());
+                    if (republicanVotes < 0)
+                        throw new ArgumentOutOfRangeException();
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                    Console.WriteLine("Number of voter must be a number");
                     badInput = true;
                     continue;
                 }
 
-                Console.Write("Input the Republican Candidate Name: ");
+                Console.Write("Republican Candidate Name: ");
                 republicanCandidate = Console.ReadLine();
 
-                Console.Write("Input the number of Democrat voters: ");
+                Console.Write("Democrat votes: ");
                 try
                 {
                     democraticVotes = Convert.ToInt32(Console.ReadLine());
+                    if (democraticVotes < 0)
+                        throw new ArgumentOutOfRangeException();
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                    Console.WriteLine("Number of voter must be a number");
                     badInput = true;
                     continue;
                 }
 
-                Console.Write("Input the Democrat Candidate Name: ");
+                Console.Write("Democrat Candidate Name: ");
                 democraticCandidate = Console.ReadLine();
             } while (badInput);
 
