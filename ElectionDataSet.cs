@@ -66,7 +66,7 @@ namespace P3_oyedotnOyesanmi
             return index;
         }
 
-        public void SearchByCounty(string county)
+        protected void SearchByCounty(string county)
         {
             var result =
                 Data.Where(results => results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county.ToLower())).ToList();
@@ -82,7 +82,7 @@ namespace P3_oyedotnOyesanmi
                 Console.WriteLine("\n**No County named {0}**", county);
         }
 
-        public void SearchByState(string state)
+        protected void SearchByState(string state)
         {
             var result =
                 Data.Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state.ToLower())).ToList();
@@ -100,7 +100,7 @@ namespace P3_oyedotnOyesanmi
 
         }
 
-        public void SearchByOffice(string office)
+        protected void SearchByOffice(string office)
         {
             var result =
                 Data.Where(

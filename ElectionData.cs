@@ -32,14 +32,3 @@
         public int Total { get; set; }
     }
 }
-
-
-//Office -- 0
-//State -- 1
-//RaceDate -- 2
-//Area -- 4
-//TotalVotes -- 6
-//RepVotes -- 7
-//RepCandidate -- 8
-//DemVotes -- 10
-//DemCandidate -- 11
