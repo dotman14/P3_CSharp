@@ -41,10 +41,16 @@ namespace P3_oyedotnOyesanmi
             var state = Console.ReadLine();
             Console.Write("Select County: ");
             var county = Console.ReadLine();
-            if (!CheckUniqueData(state, county))
-                Console.WriteLine("There's no election data for {0} County, {1}", county, state);
+            Console.Write("Select Office: ");
+            var office = Console.ReadLine();
+            if (!CheckUniqueData(state, county, office))
+                Console.WriteLine("There's no {0} election data for {1} County, {2}", office, county, state);
             else
-                Console.WriteLine("You can edit data");
+            {
+                Console.WriteLine("\nYou are about to edit the following data: ");
+                Console.WriteLine(GetSingleRow(state, county, office));
+            }
+                
         }
 
         /*
@@ -59,7 +65,7 @@ namespace P3_oyedotnOyesanmi
             string area;
             var republicanVotes = 0;
             string republicanCandidate = null;
-            int democraticVotes = 0;
+            var democraticVotes = 0;
             string democraticCandidate = null;
 
             bool badInput;

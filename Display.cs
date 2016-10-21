@@ -24,14 +24,6 @@ namespace P3_oyedotnOyesanmi
             Console.WriteLine("3. County");
         }
 
-        public static void AddNewData()
-        {
-            Console.WriteLine("1) Search by Name");
-            Console.WriteLine("2) Search by Party");
-            Console.WriteLine("3) Search by State");
-            Console.WriteLine("4) Search by County");
-        }
-
         public static void CountyToModify()
         {
             Console.WriteLine("\nYou can modify the following data: ");

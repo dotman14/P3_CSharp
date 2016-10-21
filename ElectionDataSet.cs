@@ -40,13 +40,22 @@ namespace P3_oyedotnOyesanmi
             }
         }
 
-        public bool CheckUniqueData(string state, string county)
+        public bool CheckUniqueData(string state, string county, string office)
         {
             var result =
-                Data.Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state) &&
-                                      results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county));
+                Data.Where(results => results.State  == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state) &&
+                                      results.Area   == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county) &&
+                                      results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office));
             return result.Any();
         }
 
+        public ElectionData GetSingleRow(string state, string county, string office)
+        {
+            var result =
+                Data.First(results => results.State   == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state) &&
+                                       results.Area   == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county) &&
+                                       results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office));
+            return result;
+        }
     }
 }
