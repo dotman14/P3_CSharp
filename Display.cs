@@ -13,15 +13,15 @@ namespace P3_oyedotnOyesanmi
             Console.WriteLine("3. Search Dataset");
             Console.WriteLine("4. Display Dataset Count");
             Console.WriteLine("5. Exit");
-            Console.WriteLine("----------------------------------\n");
+            Console.WriteLine("----------------------------------");
         }
 
         public static void SearchByOptions()
         {
             //Console.WriteLine("");
-            Console.WriteLine("1. Office");
-            Console.WriteLine("3. State");
-            Console.WriteLine("4. County");
+            Console.WriteLine("\n1. Office");
+            Console.WriteLine("2. State");
+            Console.WriteLine("3. County");
         }
 
         public static void AddNewData()

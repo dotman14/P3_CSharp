@@ -26,7 +26,7 @@ namespace P3_oyedotnOyesanmi
                         break;
                     case 1:
                         manipulate.Add(); //test data
-                        break;
+                   break;
                     case 2:
                         Console.Write("Option 2\n\n ");
                         break;

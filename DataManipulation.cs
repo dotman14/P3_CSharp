@@ -20,12 +20,12 @@ namespace P3_oyedotnOyesanmi
         public void Search()
         {
             Display.SearchByOptions();
-            Console.Write("Search data by: ");
+            Console.Write("\nSearch data by: ");
             var searchByVariable = Console.ReadKey().KeyChar;
             switch (searchByVariable)
             {
                 case '1':
-                    Console.Write("\nName of Office: ");
+                    Console.Write("\nType of Election: ");
                     var office = Console.ReadLine();
                     SearchByOffice(office);
                     break;
@@ -50,7 +50,7 @@ namespace P3_oyedotnOyesanmi
          */
 
         public void Add()
-        {
+       {
             bool badInput;
             do {
                 badInput = false;
@@ -97,8 +97,8 @@ namespace P3_oyedotnOyesanmi
             {
                 string repVote = RepublicanVote.ToString();
                 string demVote = DemocratVote.ToString();
-                string vote = (RepublicanVote + DemocratVote).ToString();
-                ElectionData newElec = new ElectionData(Office, State, Date, Area, vote, repVote, Republican, demVote, Democrat);
+                int vote = RepublicanVote + DemocratVote;
+                ElectionData newElec = new ElectionData(Office, State, Date, Area, vote, RepublicanVote, Republican, DemocratVote, Democrat);
                 Data.Add(newElec);
                 Console.WriteLine("\n Input Added\n");
                 Console.WriteLine(newElec.ToString());
@@ -140,25 +140,5 @@ namespace P3_oyedotnOyesanmi
             }
         }
 
-        public void SearchByYear(string year)
-        {
-            var result =
-                Data.Where(results => results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(year.ToLower()));
-            foreach (var get in result)
-            {
-                Console.WriteLine(get);
-            }
-        }
-
-        public void SearchByCandidate(string candidate)
-        {
-            var result =
-                Data.Where(results =>
-                        results.Democrat == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(candidate.ToLower()));
-            foreach (var get in result)
-            {
-                Console.WriteLine(get);
-            }
-        }     
     }
 }
