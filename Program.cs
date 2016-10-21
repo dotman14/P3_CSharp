@@ -7,12 +7,12 @@ namespace P3_oyedotnOyesanmi
         public static void Main(string[] args)
         {
             var manipulate = new DataManipulation();
-            var response = false;            
+            var response = false;
 
             while (response == false)
             {
                 Display.MainMenu();
-                
+
 
                 Console.Write("Select option: ");
                 int getResponse = Convert.ToInt32(Console.ReadLine());
@@ -22,11 +22,10 @@ namespace P3_oyedotnOyesanmi
                     case 0:
                         Console.Write("Dataset Intitilized\n");
                         manipulate.ShowData();
-
                         break;
                     case 1:
-                        manipulate.Add(); //test data
-                   break;
+                        manipulate.Add();
+                        break;
                     case 2:
                         manipulate.Modify();
                         break;

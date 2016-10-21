@@ -56,7 +56,7 @@ namespace P3_oyedotnOyesanmi
 
                 EditSingleElection(newRepublicanVotes, newDemocraticVotes, state, county, office);
             }
-                
+
         }
 
         /*
