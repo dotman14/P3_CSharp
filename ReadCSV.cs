@@ -15,7 +15,7 @@ namespace P3_oyedotnOyesanmi
         /* Array of indexs corresponding to the specific election data we want to extract from CSV
          * Feel free to add or remove index
          */
-        private readonly int[] _indexWeNeed = { 0, 1, 2, 4, 6, 7, 8, 10, 11 };
+        private readonly int[] _indexWeNeed = { 0, 1, 2, 5, 6, 7, 8, 10, 11 };
 
         public List<string[]> Content
         {
