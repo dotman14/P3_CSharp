@@ -7,7 +7,7 @@ namespace P3_oyedotnOyesanmi
         public static void Main(string[] args)
         {
             var manipulate = new DataManipulation();
-            var response = false;            
+            var response = false;
 
             while (response == false)
             {
@@ -28,7 +28,6 @@ namespace P3_oyedotnOyesanmi
                     case 0:
                         Console.Write("Dataset Intitilized\n");
                         manipulate.ShowData();
-
                         break;
                     case 1:
                         manipulate.Add(); 

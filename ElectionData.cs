@@ -8,7 +8,7 @@
         }
 
         public ElectionData(
-            string office, string state,string date, string county, int total, int rVote, string rCandidate, int dVote, string dCandidate)
+            string office, string state, string date, string county, int total, int rVote, string rCandidate, int dVote, string dCandidate)
         {
             Office = office;
             State = state;

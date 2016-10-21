@@ -13,7 +13,7 @@ namespace P3_oyedotnOyesanmi
         public ElectionDataSet()
         {
             if (Data != null)
-                Clear();
+                Data.Clear();
             /* This constructor uses chaining.
              * Same could be achieved by:
              * 1. Creating a local ReadCsv object
@@ -32,19 +32,20 @@ namespace P3_oyedotnOyesanmi
         protected internal void ShowData()
         {
             int count = 0;
-            WriteLine("{0,4}{1,11}{2,20}{3,10}{4,15}{5,8}{6,8}{7,16}{8,8}{9,16}","N-","Office","State","Date","Area","Total","Rep-Vot","Rep-Candidate","Dem-Vot","Dem-Candidate");
+            WriteLine("{0,4}{1,11}{2,20}{3,10}{4,15}{5,8}{6,8}{7,16}{8,8}{9,16}", "N-", "Office", "State", "Date", "Area", "Total", "Rep-Vot", "Rep-Candidate", "Dem-Vot", "Dem-Candidate");
             foreach (var i in Data)
-            {       
+            {
+                WriteLine("{0,4}{1}", count, i);
                 count++;
-                WriteLine("{0,4}{1}",count,i);
+
             }
         }
 
         public bool CheckUniqueData(string state, string county, string office)
         {
             var result =
-                Data.Where(results => results.State  == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state) &&
-                                      results.Area   == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county) &&
+                Data.Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state) &&
+                                      results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county) &&
                                       results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office));
             return result.Any();
         }
@@ -52,10 +53,35 @@ namespace P3_oyedotnOyesanmi
         public ElectionData GetSingleRow(string state, string county, string office)
         {
             var result =
-                Data.First(results => results.State   == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state) &&
-                                       results.Area   == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county) &&
+                Data.First(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state) &&
+                                       results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county) &&
                                        results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office));
             return result;
+        }
+
+        public int GetIndex(string state, string county, string office)
+        {
+            var index = Data.FindIndex(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state) &&
+                                                  results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county) &&
+                                                  results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office));
+            return index;
+        }
+
+        public void EditSingleElection(int rVotes, int dVotes, string state, string county, string office)
+        {
+            var index = GetIndex(state, county, office);
+            var beforeUpdate = GetSingleRow(state, county, office);
+            var afterUpdate = new ElectionData(
+                                                        beforeUpdate.Office,
+                                                        beforeUpdate.State,
+                                                        beforeUpdate.Date,
+                                                        beforeUpdate.Area,
+                                                        rVotes + dVotes,
+                                                        beforeUpdate.RepublicanVote,
+                                                        beforeUpdate.Republican,
+                                                        beforeUpdate.DemocratVote,
+                                                        beforeUpdate.Democrat);
+            Data[index] = afterUpdate;
         }
     }
 }

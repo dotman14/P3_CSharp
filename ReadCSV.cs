@@ -35,16 +35,16 @@ namespace P3_oyedotnOyesanmi
                  * For this to work as it should, make sure there are no commas within each data cell, except comma separating each data.
                  * Good => President, County, Republican, Votes, Democrat, Vote
                  * Bad  => President, County, Rep,ublican, Votes, Democ,rate, Vote
-                 */ 
+                 */
                 foreach (var i in electionRow)
                 {
                     // First we split each row by comma
-                    var contentArr = i?.Split(','); 
+                    var contentArr = i?.Split(',');
 
                     /* For each row, we get data for the specific index we want.
                      * Then we Add the string array into a List.
                      */
-                    var result = _indexWeNeed.Select(j => contentArr?[j]).ToArray(); 
+                    var result = _indexWeNeed.Select(j => contentArr?[j]).ToArray();
                     _list.Add(result);
                 }
                 return _list;
