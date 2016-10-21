@@ -85,7 +85,6 @@ namespace P3
                 Console.WriteLine("\n{0} election data for {1} County, {2} has been edited.", office, county, state);
                 Console.WriteLine(GetSingleRow(state, county, office));
             }
-
         }
 
         /*
