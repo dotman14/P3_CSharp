@@ -70,20 +70,34 @@ namespace P3_oyedotnOyesanmi
         {
             var result =
                 Data.Where(results => results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county.ToLower()));
-            foreach (var get in result)
+
+            if (result.Count() != 0)
             {
-                Console.WriteLine(get);
+                foreach (var get in result)
+                {
+                    Console.WriteLine(get);
+                }
             }
+            else
+                Console.WriteLine("\n**No County named {0}**", county);
         }
 
         public void SearchByState(string state)
         {
             var result =
                 Data.Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state.ToLower()));
-            foreach (var get in result)
+
+            if (result.Count() != 0)
             {
-                Console.WriteLine(get);
+                foreach (var get in result)
+                {
+                    Console.WriteLine(get);
+                }
             }
+            else
+                Console.WriteLine("\n**No State named {0}**", state);
+
+
         }
 
         public void SearchByOffice(string office)
@@ -91,11 +105,15 @@ namespace P3_oyedotnOyesanmi
             var result =
                 Data.Where(
                     results => results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office.ToLower()));
-            foreach (var get in result)
+            if (result.Count() != 0)
             {
-                Console.WriteLine(get);
+                foreach (var get in result)
+                {
+                    Console.WriteLine(get);
+                }
             }
+            else
+                Console.WriteLine("\n**No Office named {0}**", office);
         }
-
     }
 }

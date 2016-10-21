@@ -143,55 +143,21 @@ namespace P3_oyedotnOyesanmi
             }
         }
 
-        public void SearchByCounty(string county)
+        public void EditSingleElection(int rVotes, int dVotes, string state, string county, string office)
         {
-            var result =
-                Data.Where(results => results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county.ToLower()));
-
-            if (result.Count() != 0)
-            {
-                foreach (var get in result)
-                {
-                    Console.WriteLine(get);
-                }
-            }
-            else
-                Console.WriteLine("\n**No County named {0}**", county);
+            var index = GetIndex(state, county, office);
+            var beforeUpdate = GetSingleRow(state, county, office);
+            var afterUpdate = new ElectionData(
+                beforeUpdate.Office,
+                beforeUpdate.State,
+                beforeUpdate.Date,
+                beforeUpdate.Area,
+                rVotes + dVotes,
+                rVotes,
+                beforeUpdate.Republican,
+                dVotes,
+                beforeUpdate.Democrat);
+            Data[index] = afterUpdate;
         }
-
-        public void SearchByState(string state)
-        {
-            var result =
-                Data.Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state.ToLower()));
-
-            if (result.Count() != 0)
-            {
-                foreach (var get in result)
-                {
-                    Console.WriteLine(get);
-                }
-            }
-            else
-                Console.WriteLine("\n**No State named {0}**", state);
-
-            
-        }
-
-        public void SearchByOffice(string office)
-        {
-            var result =
-                Data.Where(
-                    results => results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office.ToLower()));
-            if (result.Count() != 0)
-            {
-                foreach (var get in result)
-                {
-                    Console.WriteLine(get);
-                }
-            }
-            else
-                Console.WriteLine("\n**No Office named {0}**", office);
-        }
-
     }
 }
