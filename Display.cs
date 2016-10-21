@@ -6,7 +6,7 @@ namespace P3_oyedotnOyesanmi
     {
         public static void MainMenu()
         {
-            Console.WriteLine("--------- Menu Display -----------");
+            Console.WriteLine("\n--------- Menu Display -----------");
             Console.WriteLine("0. Clear and Load Dataset ");
             Console.WriteLine("1. Add an item to Dataset");
             Console.WriteLine("2. Modify Dataset");
@@ -30,6 +30,13 @@ namespace P3_oyedotnOyesanmi
             Console.WriteLine("2) Search by Party");
             Console.WriteLine("3) Search by State");
             Console.WriteLine("4) Search by County");
+        }
+
+        public static void CountyToModify()
+        {
+            Console.WriteLine("\nChoose the State and County you want to modify data");
+            Console.WriteLine("1. County");
+            Console.WriteLine("2. State");
         }
     }
 }

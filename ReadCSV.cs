@@ -15,7 +15,7 @@ namespace P3_oyedotnOyesanmi
         /* Array of indexs corresponding to the specific election data we want to extract from CSV
          * Feel free to add or remove index
          */
-        private readonly int[] _indexWeNeed = { 0, 1, 2, 4, 6, 7, 8, 10, 11 };
+        private readonly int[] _indexWeNeed = { 0, 1, 2, 5, 6, 7, 8, 10, 11 };
 
         public List<string[]> Content
         {
@@ -25,7 +25,7 @@ namespace P3_oyedotnOyesanmi
                 {
                     _content =
                         url.DownloadString(
-                            "https://docs.google.com/spreadsheets/d/1TGVBgPe8wG0JHOSleqZhKkj6R-men0cMPZtdcDf3WbM/pub?output=csv");
+                            "https://docs.google.com/spreadsheets/d/1SlWCDS02UWqHRvSUJk3mFgcAStpaXLRBqi2ZIA58TFE/pub?output=csv");
                 }
 
                 //Split raw election data into rows

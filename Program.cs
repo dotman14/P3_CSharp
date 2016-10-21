@@ -15,7 +15,7 @@ namespace P3_oyedotnOyesanmi
                 
 
                 Console.Write("Select option: ");
-                int getResponse = Convert.ToInt16(Console.ReadLine());
+                int getResponse = Convert.ToInt32(Console.ReadLine());
 
                 switch (getResponse)
                 {
@@ -28,7 +28,7 @@ namespace P3_oyedotnOyesanmi
                         manipulate.Add(); //test data
                    break;
                     case 2:
-                        Console.Write("Option 2\n\n ");
+                        manipulate.Modify();
                         break;
                     case 3:
                         manipulate.Search();

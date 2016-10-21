@@ -45,6 +45,12 @@ namespace P3_oyedotnOyesanmi
             }
         }
 
+
+        public void Modify()
+        {
+            Display.CountyToModify();
+        }
+
         /*
          * County and State should be unique.
          */
