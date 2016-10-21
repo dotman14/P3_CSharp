@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 
@@ -16,7 +17,7 @@ namespace P3
          * Office -- 0, State -- 1, RaceDate -- 2, Area -- 4, TotalVotes -- 6, RepVotes -- 7
          * RepCandidate -- 8, DemVotes -- 10, DemCandidate -- 11
          */
-        private readonly int[] _indexWeNeed = { 0, 1, 2, 5, 6, 7, 8, 10, 11 };
+        private readonly int[] _indexWeNeed = {0, 1, 2, 5, 6, 7, 8, 10, 11};
 
         public List<string[]> Content
         {
@@ -24,9 +25,17 @@ namespace P3
             {
                 using (var url = new WebClient())
                 {
-                    _content =
-                        url.DownloadString(
-                            "https://docs.google.com/spreadsheets/d/1SlWCDS02UWqHRvSUJk3mFgcAStpaXLRBqi2ZIA58TFE/pub?output=csv");
+                    try
+                    {
+                        _content =
+                            url.DownloadString(
+                                "https://docs.google.com/spreadsheets/d/1SlWCDS02UWqHRvSUJk3mFgcAStpaXLRBqi2ZIA58TFE/pub?output=csv");
+                    }
+                    catch (WebException e)
+                    {
+                        throw e;
+                    }
+                    
                 }
 
                 //Split raw election data into rows
