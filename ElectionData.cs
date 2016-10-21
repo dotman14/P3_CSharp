@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace P3_oyedotnOyesanmi
+﻿namespace P3_oyedotnOyesanmi
 {
     class ElectionData
     {

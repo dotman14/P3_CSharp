@@ -147,16 +147,18 @@ namespace P3_oyedotnOyesanmi
         {
             var index = GetIndex(state, county, office);
             var beforeUpdate = GetSingleRow(state, county, office);
+
             var afterUpdate = new ElectionData(
-                beforeUpdate.Office,
-                beforeUpdate.State,
-                beforeUpdate.Date,
-                beforeUpdate.Area,
-                rVotes + dVotes,
-                rVotes,
-                beforeUpdate.Republican,
-                dVotes,
-                beforeUpdate.Democrat);
+                                                beforeUpdate.Office,
+                                                beforeUpdate.State,
+                                                beforeUpdate.Date,
+                                                beforeUpdate.Area,
+                                                rVotes + dVotes,
+                                                rVotes,
+                                                beforeUpdate.Republican,
+                                                dVotes,
+                                                beforeUpdate.Democrat
+                                              );
             Data[index] = afterUpdate;
         }
     }

@@ -15,13 +15,16 @@ namespace P3_oyedotnOyesanmi
 
                 int getResponse = 10;
                 Console.Write("Select option: ");
-                try {
+                try
+                {
                     getResponse = Convert.ToInt32(Console.ReadLine());
-                } catch (Exception ex){
+                }
+                catch (Exception ex)
+                {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine("\n**Wrong option - Must input an number (0-5)**");
                 }
-                
+
 
                 switch (getResponse)
                 {
@@ -30,7 +33,7 @@ namespace P3_oyedotnOyesanmi
                         manipulate.ShowData();
                         break;
                     case 1:
-                        manipulate.Add(); 
+                        manipulate.Add();
                         break;
                     case 2:
                         manipulate.Modify();
