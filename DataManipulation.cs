@@ -49,12 +49,15 @@ namespace P3_oyedotnOyesanmi
             {
                 Console.WriteLine("\nAt this time, you are only allowed to edit number of votes: ");
                 Console.WriteLine(GetSingleRow(state, county, office));
-                Console.Write("New Votes for Republican Party: ");
+                Console.Write("\nNew Votes for Republican Party: ");
                 var newRepublicanVotes = Convert.ToInt32(Console.ReadLine());
                 Console.Write("New Votes for Democratic Party: ");
                 var newDemocraticVotes = Convert.ToInt32(Console.ReadLine());
 
                 EditSingleElection(newRepublicanVotes, newDemocraticVotes, state, county, office);
+
+                Console.WriteLine("\n{0} election data for {1} County, {2} has been edited.", office, county, state);
+                Console.WriteLine(GetSingleRow(state, county, office));
             }
 
         }
