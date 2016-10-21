@@ -1,10 +1,12 @@
-﻿namespace P3_oyedotnOyesanmi
+﻿using System;
+
+namespace P3_oyedotnOyesanmi
 {
     class ElectionData
     {
         public override string ToString()
         {
-            return $"{Office,11}{State,20}{Date,10}{Area,15}{Total,8}{Republican,8}{RepublicanVote,16}{Democrat,8}{DemocratVote,16} ";
+            return $"{Office,8}{State,20}{Date,10}{Area,15}{Total,8}{Republican,8}{RepublicanVote,16}{Democrat,8}{DemocratVote,16} ";
         }
 
         public ElectionData(

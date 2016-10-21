@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using static System.Console;
 
 namespace P3_oyedotnOyesanmi
 {
@@ -31,17 +30,17 @@ namespace P3_oyedotnOyesanmi
 
         protected internal void ShowData()
         {
-            int count = 0;
-            WriteLine("{0,4}{1,11}{2,20}{3,10}{4,15}{5,8}{6,8}{7,16}{8,8}{9,16}", "N-", "Office", "State", "Date", "Area", "Total", "Rep-Vot", "Rep-Candidate", "Dem-Vot", "Dem-Candidate");
+            //int count = 0;
+            Display.GetMainHeader();
             foreach (var i in Data)
             {
-                WriteLine("{0,4}{1}", count, i);
-                count++;
+                Console.WriteLine("{0}", i);
+                //count++;
 
             }
         }
 
-        public bool CheckUniqueData(string state, string county, string office)
+        protected bool CheckUniqueData(string state, string county, string office)
         {
             var result =
                 Data.Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state) &&
@@ -50,7 +49,7 @@ namespace P3_oyedotnOyesanmi
             return result.Any();
         }
 
-        public ElectionData GetSingleRow(string state, string county, string office)
+        protected ElectionData GetSingleRow(string state, string county, string office)
         {
             var result =
                 Data.First(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state) &&
@@ -59,7 +58,7 @@ namespace P3_oyedotnOyesanmi
             return result;
         }
 
-        public int GetIndex(string state, string county, string office)
+        protected int GetIndex(string state, string county, string office)
         {
             var index = Data.FindIndex(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state) &&
                                                   results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county) &&
@@ -67,21 +66,36 @@ namespace P3_oyedotnOyesanmi
             return index;
         }
 
-        public void EditSingleElection(int rVotes, int dVotes, string state, string county, string office)
+        public void SearchByCounty(string county)
         {
-            var index = GetIndex(state, county, office);
-            var beforeUpdate = GetSingleRow(state, county, office);
-            var afterUpdate = new ElectionData(
-                                                        beforeUpdate.Office,
-                                                        beforeUpdate.State,
-                                                        beforeUpdate.Date,
-                                                        beforeUpdate.Area,
-                                                        rVotes + dVotes,
-                                                        beforeUpdate.RepublicanVote,
-                                                        beforeUpdate.Republican,
-                                                        beforeUpdate.DemocratVote,
-                                                        beforeUpdate.Democrat);
-            Data[index] = afterUpdate;
+            var result =
+                Data.Where(results => results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county.ToLower()));
+            foreach (var get in result)
+            {
+                Console.WriteLine(get);
+            }
         }
+
+        public void SearchByState(string state)
+        {
+            var result =
+                Data.Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state.ToLower()));
+            foreach (var get in result)
+            {
+                Console.WriteLine(get);
+            }
+        }
+
+        public void SearchByOffice(string office)
+        {
+            var result =
+                Data.Where(
+                    results => results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office.ToLower()));
+            foreach (var get in result)
+            {
+                Console.WriteLine(get);
+            }
+        }
+
     }
 }

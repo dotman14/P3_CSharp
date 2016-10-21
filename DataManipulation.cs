@@ -57,6 +57,7 @@ namespace P3_oyedotnOyesanmi
                 EditSingleElection(newRepublicanVotes, newDemocraticVotes, state, county, office);
 
                 Console.WriteLine("\n{0} election data for {1} County, {2} has been edited.", office, county, state);
+                Display.GetMainHeader();
                 Console.WriteLine(GetSingleRow(state, county, office));
             }
 
@@ -143,36 +144,21 @@ namespace P3_oyedotnOyesanmi
             }
         }
 
-        public void SearchByCounty(string county)
+        public void EditSingleElection(int rVotes, int dVotes, string state, string county, string office)
         {
-            var result =
-                Data.Where(results => results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county.ToLower()));
-            foreach (var get in result)
-            {
-                Console.WriteLine(get);
-            }
+            var index = GetIndex(state, county, office);
+            var beforeUpdate = GetSingleRow(state, county, office);
+            var afterUpdate = new ElectionData(
+                                                        beforeUpdate.Office,
+                                                        beforeUpdate.State,
+                                                        beforeUpdate.Date,
+                                                        beforeUpdate.Area,
+                                                        rVotes + dVotes,
+                                                        rVotes,
+                                                        beforeUpdate.Republican,
+                                                        dVotes,
+                                                        beforeUpdate.Democrat);
+            Data[index] = afterUpdate;
         }
-
-        public void SearchByState(string state)
-        {
-            var result =
-                Data.Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state.ToLower()));
-            foreach (var get in result)
-            {
-                Console.WriteLine(get);
-            }
-        }
-
-        public void SearchByOffice(string office)
-        {
-            var result =
-                Data.Where(
-                    results => results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office.ToLower()));
-            foreach (var get in result)
-            {
-                Console.WriteLine(get);
-            }
-        }
-
     }
 }
