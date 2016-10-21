@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 
@@ -29,6 +30,12 @@ namespace P3
                             "https://docs.google.com/spreadsheets/d/1SlWCDS02UWqHRvSUJk3mFgcAStpaXLRBqi2ZIA58TFE/pub?output=csv");
                 }
 
+                /* The method above works just fine, but in case of network issues, download the CSV file from the above URL.
+                 * Uncomment the code below and edit path to csv file in your file system, then comment the block of code above.
+                 */
+
+                //_content = System.IO.File.ReadAllText(@"C:\Users\Phase3\Documents\Visual Studio 2015\Projects\P3\presidential2008.csv");
+
                 //Split raw election data into rows
                 var electionRow = _content?.Split('\n');
 
@@ -41,11 +48,13 @@ namespace P3
                 {
                     // First we split each row by comma
                     var contentArr = i?.Split(',');
+                    if (contentArr == null)
+                        throw new ArgumentNullException(nameof(contentArr));
 
                     /* For each row, we get data for the specific index we want.
                      * Then we Add the string array into a List.
                      */
-                    var result = _indexWeNeed.Select(j => contentArr?[j]).ToArray();
+                    var result = _indexWeNeed.Select(j => contentArr[j]).ToArray();
                     _list.Add(result);
                 }
                 return _list;
