@@ -15,7 +15,7 @@ namespace P3_oyedotnOyesanmi
                 
 
                 Console.Write("Select option: ");
-                int getResponse = Convert.ToInt16(Console.ReadLine());
+                int getResponse = Convert.ToInt32(Console.ReadLine());
 
                 switch (getResponse)
                 {

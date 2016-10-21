@@ -25,7 +25,7 @@ namespace P3_oyedotnOyesanmi
                 {
                     _content =
                         url.DownloadString(
-                            "https://docs.google.com/spreadsheets/d/1TGVBgPe8wG0JHOSleqZhKkj6R-men0cMPZtdcDf3WbM/pub?output=csv");
+                            "https://docs.google.com/spreadsheets/d/1SlWCDS02UWqHRvSUJk3mFgcAStpaXLRBqi2ZIA58TFE/pub?output=csv");
                 }
 
                 //Split raw election data into rows
