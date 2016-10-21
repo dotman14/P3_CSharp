@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace P3_oyedotnOyesanmi
+namespace P3
 {
     public static class Display
     {

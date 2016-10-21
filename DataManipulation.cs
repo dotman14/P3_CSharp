@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Globalization;
+using System.Linq;
 
-namespace P3_oyedotnOyesanmi
+namespace P3
 {
     class DataManipulation : ElectionDataSet
     {
