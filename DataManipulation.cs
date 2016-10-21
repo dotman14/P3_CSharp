@@ -6,6 +6,11 @@ namespace P3_oyedotnOyesanmi
 {
     class DataManipulation : ElectionDataSet
     {
+        /* Search Method
+         * Allow to search for a specific entries using e3 criteria : Office, State or County.
+         * Hence the user can search for a specific county, a specific State or a specific 
+         * kind of election.
+         */
         public void Search()
         {
             Display.SearchByOptions();
@@ -34,9 +39,17 @@ namespace P3_oyedotnOyesanmi
             }
         }
 
-
+        /*Modify method
+         * to modify the user must input 3 information to retrieve the entry he wants to modify:
+         * State, County and kind of election (office). The association of these 3 criteria 
+         * will always return a unique result.
+         * The user is only allowed to modify the number of votes for democrat and republican.
+         */
         public void Modify()
         {
+            int newRepublicanVotes = 0, newDemocraticVotes = 0;
+
+
             Console.Write("\nSelect State: ");
             var state = Console.ReadLine();
             Console.Write("Select County: ");
@@ -47,13 +60,26 @@ namespace P3_oyedotnOyesanmi
                 Console.WriteLine("There's no {0} election data for {1} County, {2}", office, county, state);
             else
             {
-                Console.WriteLine("\nAt this time, you are only allowed to edit number of votes: ");
-                Console.WriteLine(GetSingleRow(state, county, office));
-                Console.Write("\nNew Votes for Republican Party: ");
-                var newRepublicanVotes = Convert.ToInt32(Console.ReadLine());
-                Console.Write("New Votes for Democratic Party: ");
-                var newDemocraticVotes = Convert.ToInt32(Console.ReadLine());
-
+                bool badInput;
+                do {
+                    badInput = false;
+                    Console.WriteLine("\nAt this time, you are only allowed to edit number of votes: ");
+                    Console.WriteLine(GetSingleRow(state, county, office));
+                    try
+                    {
+                        Console.Write("\nNew Votes for Republican Party: ");
+                        newRepublicanVotes = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("New Votes for Democratic Party: ");
+                        newDemocraticVotes = Convert.ToInt32(Console.ReadLine());
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("\n{0}",ex.Message);
+                        Console.WriteLine("**Number of votes must be of type numeric**");
+                        badInput = true;
+                    }
+                } while (badInput);
+         
                 EditSingleElection(newRepublicanVotes, newDemocraticVotes, state, county, office);
 
                 Console.WriteLine("\n{0} election data for {1} County, {2} has been edited.", office, county, state);

@@ -12,8 +12,9 @@ namespace P3_oyedotnOyesanmi
         //List of election data array.
         private readonly List<string[]> _list = new List<string[]>();
 
-        /* Array of indexs corresponding to the specific election data we want to extract from CSV
-         * Feel free to add or remove index
+        /* Array of indexes corresponding to the specific election data we want to extract from CSV
+         * Office -- 0, State -- 1, RaceDate -- 2, Area -- 4, TotalVotes -- 6, RepVotes -- 7
+         * RepCandidate -- 8, DemVotes -- 10, DemCandidate -- 11
          */
         private readonly int[] _indexWeNeed = { 0, 1, 2, 5, 6, 7, 8, 10, 11 };
 
