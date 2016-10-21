@@ -34,10 +34,15 @@ namespace P3_oyedotnOyesanmi
             }
         }
 
+
+        public void Modify()
+        {
+            Display.CountyToModify();
+        }
+
         /*
          * County and State should be unique.
          */
-
         public void Add(string office, string state, string date, string county, int rVote, string rCand, int dVote, string dCand)
         {
             var result =

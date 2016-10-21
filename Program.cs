@@ -28,7 +28,7 @@ namespace P3_oyedotnOyesanmi
                         manipulate.Add("Senate", "Senate", "Senate", "Senate", 12 ,"Senate", 12, "Senate"); //test data
                         break;
                     case 2:
-                        Console.Write("Option 2\n\n ");
+                        manipulate.Modify();
                         break;
                     case 3:
                         manipulate.Search();
