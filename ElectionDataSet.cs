@@ -1,5 +1,4 @@
 ﻿using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -46,9 +45,7 @@ namespace P3_oyedotnOyesanmi
             var result =
                 Data.Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state) &&
                                       results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county));
-
             return result.Any();
-
         }
 
     }
