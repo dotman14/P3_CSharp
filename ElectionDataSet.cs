@@ -22,7 +22,7 @@ namespace P3
                 Clear();               //if the list is not empty, clear it
             
             //initialize a new list with the content of the CSV file
-            Data = new ReadCsv().Content.Select(x => new ElectionData(x[0], CultureInfo.CurrentCulture.TextInfo.ToTitleCase(x[1].ToLower()), x[2], x[3], Convert.ToInt32(x[4]), Convert.ToInt32(x[5]), x[6], Convert.ToInt32(x[7]), x[8])).ToList();
+            Data = new ReadCsv().CsvContent.Select(x => new ElectionData(x[0], CultureInfo.CurrentCulture.TextInfo.ToTitleCase(x[1].ToLower()), x[2], x[3], Convert.ToInt32(x[4]), Convert.ToInt32(x[5]), x[6], Convert.ToInt32(x[7]), x[8])).ToList();
         }
 
         /*Count method

@@ -24,8 +24,11 @@ namespace P3
             get
             {
                 using (var url = new WebClient())
-                    content = url.DownloadString("https://docs.google.com/spreadsheets/d/1SlWCDS02UWqHRvSUJk3mFgcAStpaXLRBqi2ZIA58TFE/pub?output=csv");
-               
+                {
+                    content =
+                        url.DownloadString(
+                            "https://docs.google.com/spreadsheets/d/1SlWCDS02UWqHRvSUJk3mFgcAStpaXLRBqi2ZIA58TFE/pub?output=csv");
+                }
 
                 /* The method above works just fine, but in case of network issues, download the CSV file from the above URL.
                  * Uncomment the code below and edit path to csv file in your file system, then comment the block of code above.
