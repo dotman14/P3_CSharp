@@ -13,43 +13,44 @@ namespace P3
                 while (response == false)
                 {
                     Display.MainMenu();
-                    var getResponse = 10; //initialize to an invalid value
+                    var getResponse = 10;               //initialize to an invalid value
                     Console.Write("Select option: ");
                     try
-                    {
+                    {                                   //throw an exception if the input is invalid
                         getResponse = Convert.ToInt32(Console.ReadLine());
                         if (!(getResponse >= 0 && getResponse <= 5))
                             throw new ArgumentOutOfRangeException();
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex.Message);
+                        Console.WriteLine(ex.Message);  //catch the exception and display the error
                     }
-                    switch (getResponse) //return the action corresponding to the choice
+
+                    switch (getResponse)                //return the action corresponding to the choice
                     {
-                        case 0: //initializes and shows data
+                        case 0:                         //initializes and shows data
                             manipulate.ShowData();
                             break;
-                        case 1:
+                        case 1:                         //add a new entry
                             manipulate.Add();
                             break;
-                        case 2:
+                        case 2:                         //modify a specific entry
                             manipulate.Modify();
                             break;
-                        case 3:
+                        case 3:                         //search a specific entry
                             manipulate.Search();
                             break;
-                        case 4:
+                        case 4:                         //display the number of entry
                             Console.Write("Dataset count {0}\n\n", manipulate.Count);
                             break;
-                        case 5:
+                        case 5:                         //exit the program
                             response = true;
                             break;
                     }
                 }
             }
             catch (WebException e)
-            {
+            {                               //catch error if the online ressource is not available
                 Console.WriteLine("{0} while reading your file. Make sure it exist", e.Status);
             }
         }
