@@ -196,7 +196,6 @@ namespace P3
             }
             else
                 Console.WriteLine("Data already exist");        //if duplicate exist
-            
         }
 
         /*EditSingleElection method
