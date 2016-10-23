@@ -33,11 +33,11 @@ namespace P3
             Console.WriteLine("2. State");
         }
 
-        //Display the main heager 
+        //Display the main header 
         public static void GetMainHeader()
         {
             Console.WriteLine(
-                $"\n{"OFFICE",1}{"STATE",24}{"DATE",8}{"AREA",24}{"TOTAL",11}{"R-VOTES",11}{"R-CANDIDATE",15}{"D-VOTES",18}{"D-CANDIDATE",14}\n{"-----------------------------------------------------------------------------------------------------------------------------------------------",0}");
+                $"\n{"OFFICE",1}{"STATE",24}{"DATE",12}{"AREA",23}{"TOTAL",10}{"R-VOTES",11}{"R-CANDIDATE",15}{"D-VOTES",18}{"D-CANDIDATE",14}\n{"-----------------------------------------------------------------------------------------------------------------------------------------------",0}");
         }
     }
 }

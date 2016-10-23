@@ -22,7 +22,7 @@ namespace P3
                 Clear();               //if the list is not empty, clear it
             
             //initialize a new list with the content of the CSV file
-            Data = new ReadCsv().CsvContent.Select(x => new ElectionData(x[0], CultureInfo.CurrentCulture.TextInfo.ToTitleCase(x[1].ToLower()), x[2], x[3], Convert.ToInt32(x[4]), Convert.ToInt32(x[5]), x[6], Convert.ToInt32(x[7]), x[8])).ToList();
+            Data = new ReadCsv().CsvContent.Select(x => new ElectionData(x[0], CultureInfo.CurrentCulture.TextInfo.ToTitleCase(x[1].ToLower()), x[2].Substring(0,4), x[3], Convert.ToInt32(x[4]), Convert.ToInt32(x[5]), x[6], Convert.ToInt32(x[7]), x[8])).ToList();
         }
 
         /*Count method
@@ -58,12 +58,13 @@ namespace P3
          * is unique.
          * The method return true if a entry as been found or false if not
          */
-        protected bool CheckUniqueData(string state, string county, string office)
+        protected bool CheckUniqueData(string state, string county, string year, string office)
         {
             var result =
                 Data.Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state) &&
                                       results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county) &&
-                                      results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office));
+                                      results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office) &&
+                                      results.Date == year);
             return result.Any();
         }
 
@@ -73,12 +74,13 @@ namespace P3
          * area and office is unique.
          * The method return an ElectionData object if it exist
          */
-        protected ElectionData GetSingleRow(string state, string county, string office)
+        protected ElectionData GetSingleRow(string state, string county, string year, string office)
         {
             var result =
-                Data.First(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state) &&
+                Data.FirstOrDefault(results =>  results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state) &&
                                        results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county) &&
-                                       results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office));
+                                       results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office) &&
+                                       results.Date == year);
             return result;
         }
 
@@ -87,11 +89,14 @@ namespace P3
          * If the data exist it should be unique because the association of the attribute state, 
          * area and office is unique.
          */
-        protected int GetIndex(string state, string county, string office)
+        protected int GetIndex(string state, string county, string year, string office)
         {
+
             var index = Data.FindIndex(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state) &&
                                                   results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county) &&
-                                                  results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office));
+                                                  results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office) &&
+                                                  results.Date == year);
+
             return index;
         }
 

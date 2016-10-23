@@ -29,14 +29,14 @@
 
         /*Public properties
          */
-        public string Date { get; set; }
-        public string Republican { get; set; }
-        public int RepublicanVote { get; set; }
-        public string Democrat { get; set; }
-        public int DemocratVote { get; set; }
-        public string Area { get; set; }
-        public string State { get; set; }
-        public string Office { get; set; }
-        public int Total { get; set; }
+        public string Date { get; }
+        public string Republican { get; }
+        private int RepublicanVote { get; }
+        public string Democrat { get; }
+        private int DemocratVote { get; }
+        public string Area { get; }
+        public string State { get; }
+        public string Office { get; }
+        private int Total { get; }
     }
 }

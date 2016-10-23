@@ -59,10 +59,13 @@ namespace P3
             Console.Write("Select County: ");
             var county = Console.ReadLine();
 
+            Console.Write("Year of Election: ");
+            var year = Console.ReadLine();
+
             Console.Write("Select Office: ");
             var office = Console.ReadLine();
 
-            if (!CheckUniqueData(state, county, office))        //check if the entry exists
+            if (!CheckUniqueData(state, county, year, office))        //check if the entry exists
                 Console.WriteLine("There's no {0} election data for {1} County, {2}", office, county, state);
             else
             {                                                   //if the entry exist
@@ -72,7 +75,9 @@ namespace P3
                 {
                     badInput = false;
                     Display.GetMainHeader();
-                    Console.WriteLine(GetSingleRow(state, county, office)); //display the entry to modify
+                    Console.WriteLine(GetSingleRow(state, county, year, office));
+
+                    //display the entry to modify
                     try                                         //user can only modify number of vote
                     {                                           //check user input
                         Console.Write("\nNew Votes for Republican Party: ");
@@ -93,11 +98,11 @@ namespace P3
                     }
                 } while (badInput);
                                                         //if the input is good, we edit the entry
-                EditSingleElection(newRepublicanVotes, newDemocraticVotes, state, county, office);
+                EditSingleElection(newRepublicanVotes, newDemocraticVotes, state, county, year, office);
 
                 Console.WriteLine("\n{0} election data for {1} County, {2} has been edited.", office, county, state);
                 Display.GetMainHeader();
-                Console.WriteLine(GetSingleRow(state, county, office));
+                Console.WriteLine(GetSingleRow(state, county, year, office));
             }
         }
 
@@ -190,10 +195,15 @@ namespace P3
         /*EditSingleElection method
          * this method allow to edit an entry of the List of ElectionData object
          */
-        public void EditSingleElection(int rVotes, int dVotes, string state, string county, string office)
+        public void EditSingleElection(int rVotes, int dVotes, string state, string county, string year, string office)
         {
-            var index = GetIndex(state, county, office);    //get the index of the entry to modify 
-            var beforeUpdate = GetSingleRow(state, county, office); //get the row to modify
+            var index = GetIndex(state, county, year, office);    //get the index of the entry to modify 
+            if(index < 0)
+            {
+                Console.WriteLine("Sorry, we have no data for that election");
+                return;
+            }
+            var beforeUpdate = GetSingleRow(state, county, year, office); //get the row to modify
 
                                                             //create a new object with the modified data
             var afterUpdate = new ElectionData(

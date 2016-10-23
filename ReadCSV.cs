@@ -23,7 +23,7 @@ namespace P3
         {
             get
             {
-                using (var url = new WebClient())
+                using (var url = new WebClient()) 
                 {
                     content =
                         url.DownloadString(
