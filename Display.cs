@@ -23,6 +23,7 @@ namespace P3
             Console.WriteLine("\n1. Office");
             Console.WriteLine("2. State");
             Console.WriteLine("3. County");
+            Console.WriteLine("4. Year");
         }
 
         //Modify display function

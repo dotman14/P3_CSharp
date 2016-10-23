@@ -9,14 +9,15 @@ namespace P3
     {
         protected List<ElectionData> Data { get; }
 
-        /*ElectionDataSet constructor 
+        /* ElectionDataSet constructor 
          * This constructor uses chaining.
          * Same could be achieved by:
          * 1. Creating a local ReadCsv object
          * 2. Call Content Property on the object...That returns a list of string arrays 
          * 3. Use LINQ to convert List<string[]> into List<ElectionData>
          */
-        public ElectionDataSet()
+
+        protected ElectionDataSet()
         {
             if (Data != null)
                 Clear();               //if the list is not empty, clear it
@@ -40,15 +41,23 @@ namespace P3
          */
         protected void Add(ElectionData election) => Data.Add(election);
 
-        /*ShowData method
+        /*DisplayAllData method
          * display the content of the List using a foreach loop
          */
-        protected internal void ShowData()
+        protected internal void DisplayAllData()
         {
             Display.GetMainHeader();                    //display the header
             foreach (var i in Data)
             {                                           //display the row, call the ToString 
                 Console.WriteLine("{0}", i);            //method of ElectionData object
+            }
+        }
+
+        private void DisplaySomeData(List<ElectionData> list)
+        {
+            foreach (var get in list)
+            {
+                Console.WriteLine(get);             //display each corresponding year entry found
             }
         }
 
@@ -113,10 +122,7 @@ namespace P3
                                                         //if the county exists
             if (result.Count() != 0)
             {
-                foreach (var get in result)
-                {
-                    Console.WriteLine(get);             //display the county found
-                }
+                DisplaySomeData(result);                //display the county found
             }
             else                                        //if the county doesn't exit 
                 Console.WriteLine("\n**No County named {0}**", county);
@@ -126,6 +132,7 @@ namespace P3
          * this method allows to search a subset of entry with the corresponding state 
          * searched by the user. The method return an set ElectionData object if it exists.
          */
+
         protected void SearchByState(string state)
         {
                                                         //search for the corresponding state
@@ -134,12 +141,9 @@ namespace P3
                                             
             if (result.Count() != 0)                    //if the state exist
             {
-                foreach (var get in result)
-                {
-                    Console.WriteLine(get);             //display each corresponding state entry found
-                }
+                DisplaySomeData(result);               //display each corresponding state entry found
             }
-            else                                        //if the state doesn't exit
+            else                                        //if the state doesn't exit  
                 Console.WriteLine("\n**No State named {0}**", state);
         }
 
@@ -155,13 +159,22 @@ namespace P3
 
             if (result.Count() != 0)                    //if the office exist
             {
-                foreach (var get in result)
-                {
-                    Console.WriteLine(get);             //display each corresponding office entry found
-                }
+                DisplaySomeData(result);                //Display correspondidng office found
             }
             else                                        //if the office doesn't exit
                 Console.WriteLine("\n**No Office named {0}**", office);
+        }
+
+        protected void SearchByYear(string year)
+        {                                               //search for the corresponding year
+            var result = Data.Where( results => results.Date == year.ToLower()).ToList();
+
+            if (result.Count() != 0)                    //if the year exist
+            {
+                DisplaySomeData(result);
+            }
+            else                                        //if the office doesn't exit
+                Console.WriteLine("\n**No election held in {0}**", year);
         }
     }
 }

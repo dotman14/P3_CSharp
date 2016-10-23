@@ -37,6 +37,12 @@ namespace P3
                     Display.GetMainHeader();
                     SearchByCounty(county);
                     break;
+                case '4':                                       //search by year
+                    Console.Write("\nYear of Election: ");
+                    var year = Console.ReadLine();
+                    Display.GetMainHeader();
+                    SearchByYear(year);
+                    break;
                 default:
                     Console.WriteLine("\nThis option does not exist");
                     break;

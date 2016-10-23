@@ -29,7 +29,7 @@ namespace P3
                     switch (getResponse)                //return the action corresponding to the choice
                     {
                         case 0:                         //initializes and shows data
-                            manipulate.ShowData();
+                            manipulate.DisplayAllData();
                             break;
                         case 1:                         //add a new entry
                             manipulate.Add();
