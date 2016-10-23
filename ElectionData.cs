@@ -7,7 +7,7 @@
          */
         public override string ToString()
         {
-            return $"{Office,1}{State,23}{Date,10}{Area,23}{Total,8}{RepublicanVote,9}{Republican,23}{DemocratVote,9}{Democrat,20} ";
+            return $"{Office,1}{State,23}{Date,8}{Area,22}{Total,10}{RepublicanVote,11}{Republican,23}{DemocratVote,11}{Democrat,20} ";
         }
 
         /*ElectionData constructor
