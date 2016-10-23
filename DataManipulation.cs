@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
 
 namespace P3
@@ -72,7 +71,7 @@ namespace P3
             var office = Console.ReadLine();
 
             if (!CheckUniqueData(state, county, year, office))        //check if the entry exists
-                Console.WriteLine("There's no {0} election data for {1} County, {2}", office, county, state);
+                Console.WriteLine("There's no {0} election data for {1} County, {2}, in {3}", office, county, state, year);
             else
             {                                                   //if the entry exist
                 Console.WriteLine("\nAt this time, you are only allowed to edit number of votes: ");
@@ -106,7 +105,7 @@ namespace P3
                                                         //if the input is good, we edit the entry
                 EditSingleElection(newRepublicanVotes, newDemocraticVotes, state, county, year, office);
 
-                Console.WriteLine("\n{0} election data for {1} County, {2} has been edited.", office, county, state);
+                Console.WriteLine("\n {0} {1} election data for {2} County, {3} has been edited.", year, office, county, state);
                 Display.GetMainHeader();
                 Console.WriteLine(GetSingleRow(state, county, year, office));
             }
@@ -120,7 +119,7 @@ namespace P3
         {
             string office;
             string state;
-            string date;
+            string year;
             string area;
             var republicanVotes = 0;
             string republicanCandidate = null;
@@ -137,8 +136,8 @@ namespace P3
                 Console.Write("State name: ");
                 state = Console.ReadLine();
 
-                Console.Write("Date of Election: ");
-                date = Console.ReadLine();
+                Console.Write("Year of Election: ");
+                year = Console.ReadLine();
 
                 Console.Write("County name: ");
                 area = Console.ReadLine();
@@ -178,16 +177,18 @@ namespace P3
                 democraticCandidate = Console.ReadLine();
             } while (badInput);
 
-            //check if ther is any duplicate
+            //check if there is any duplicate
             var result =
-                Data.Where(results => area != null && results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(area.ToLower())).
-                     Where(results => state != null && results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state.ToLower()));
+                Data.Where(results => area != null && results.Area == ElectionData.TitleCase(area.ToLower())).
+                     Where(results => state != null && results.State == ElectionData.TitleCase(state.ToLower())).
+                     Where(results => office != null && results.Office == ElectionData.TitleCase(office.ToLower())).
+                     Where(results => year != null && results.Date == year);
 
             if (!result.Any())                                  //if there is no duplicate
             {
                 var vote = republicanVotes + democraticVotes;   //determine the total votes
                                                                 //declare and initialize a new election data objet
-                var newElec = new ElectionData(office, state, date, area, vote, republicanVotes, republicanCandidate, democraticVotes, democraticCandidate);
+                var newElec = new ElectionData(office, state, year, area, vote, republicanVotes, republicanCandidate, democraticVotes, democraticCandidate);
                 Add(newElec);                                   //add the object to the list
                 Console.WriteLine("\n Input Added\n");
                 Display.GetMainHeader();
@@ -201,7 +202,8 @@ namespace P3
         /*EditSingleElection method
          * this method allow to edit an entry of the List of ElectionData object
          */
-        public void EditSingleElection(int rVotes, int dVotes, string state, string county, string year, string office)
+
+        private void EditSingleElection(int rVotes, int dVotes, string state, string county, string year, string office)
         {
             var index = GetIndex(state, county, year, office);    //get the index of the entry to modify 
             if(index < 0)

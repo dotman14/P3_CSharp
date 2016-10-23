@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace P3
@@ -23,7 +22,11 @@ namespace P3
                 Clear();               //if the list is not empty, clear it
             
             //initialize a new list with the content of the CSV file
-            Data = new ReadCsv().CsvContent.Select(x => new ElectionData(x[0], CultureInfo.CurrentCulture.TextInfo.ToTitleCase(x[1].ToLower()), x[2].Substring(0,4), x[3], Convert.ToInt32(x[4]), Convert.ToInt32(x[5]), x[6], Convert.ToInt32(x[7]), x[8])).ToList();
+            Data =
+                new ReadCsv().CsvContent.Select(
+                    x =>
+                        new ElectionData(x[0], ElectionData.TitleCase(x[1].ToLower()), x[2].Substring(0, 4), x[3],
+                            Convert.ToInt32(x[4]), Convert.ToInt32(x[5]), x[6], Convert.ToInt32(x[7]), x[8])).ToList();
         }
 
         /*Count method
@@ -70,9 +73,9 @@ namespace P3
         protected bool CheckUniqueData(string state, string county, string year, string office)
         {
             var result =
-                Data.Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state) &&
-                                      results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county) &&
-                                      results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office) &&
+                Data.Where(results => results.State == ElectionData.TitleCase(state) &&
+                                      results.Area == ElectionData.TitleCase(county) &&
+                                      results.Office == ElectionData.TitleCase(office) &&
                                       results.Date == year);
             return result.Any();
         }
@@ -86,9 +89,9 @@ namespace P3
         protected ElectionData GetSingleRow(string state, string county, string year, string office)
         {
             var result =
-                Data.FirstOrDefault(results =>  results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state) &&
-                                       results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county) &&
-                                       results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office) &&
+                Data.FirstOrDefault(results =>  results.State == ElectionData.TitleCase(state) &&
+                                       results.Area == ElectionData.TitleCase(county) &&
+                                       results.Office == ElectionData.TitleCase(office) &&
                                        results.Date == year);
             return result;
         }
@@ -101,9 +104,9 @@ namespace P3
         protected int GetIndex(string state, string county, string year, string office)
         {
 
-            var index = Data.FindIndex(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state) &&
-                                                  results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county) &&
-                                                  results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office) &&
+            var index = Data.FindIndex(results => results.State == ElectionData.TitleCase(state) &&
+                                                  results.Area == ElectionData.TitleCase(county) &&
+                                                  results.Office == ElectionData.TitleCase(office) &&
                                                   results.Date == year);
 
             return index;
@@ -117,7 +120,7 @@ namespace P3
         {
                                                         //search for the corresponding county if it exists
             var result =
-                Data.Where(results => results.Area == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(county.ToLower())).ToList();
+                Data.Where(results => results.Area == ElectionData.TitleCase(county.ToLower())).ToList();
 
                                                         //if the county exists
             if (result.Count() != 0)
@@ -137,7 +140,7 @@ namespace P3
         {
                                                         //search for the corresponding state
             var result =
-                Data.Where(results => results.State == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state.ToLower())).ToList();
+                Data.Where(results => results.State == ElectionData.TitleCase(state.ToLower())).ToList();
                                             
             if (result.Count() != 0)                    //if the state exist
             {
@@ -155,7 +158,7 @@ namespace P3
         {                                               //search for the corresponding office
             var result =
                 Data.Where(
-                    results => results.Office == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(office.ToLower())).ToList();
+                    results => results.Office == ElectionData.TitleCase(office.ToLower())).ToList();
 
             if (result.Count() != 0)                    //if the office exist
             {

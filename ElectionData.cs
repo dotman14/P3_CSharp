@@ -1,14 +1,12 @@
-﻿namespace P3
+﻿using System.Globalization;
+namespace P3
 {
     class ElectionData
     {
         /*Tostring method
          * override the ToString method to allow ElectionData object to display  there result
          */
-        public override string ToString()
-        {
-            return $"{Office,1}{State,23}{Date,8}{Area,22}{Total,10}{RepublicanVote,11}{Republican,23}{DemocratVote,11}{Democrat,20} ";
-        }
+        public override string ToString() => $"{Office,1}{State,23}{Date,8}{Area,22}{Total,10}{RepublicanVote,11}{Republican,23}{DemocratVote,11}{Democrat,20} ";
 
         /*ElectionData constructor
          * Class constructor that initialize the attribute of the object
@@ -38,5 +36,9 @@
         public string State { get; }
         public string Office { get; }
         private int Total { get; }
+        public static string TitleCase(string str)
+        {
+            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(str);
+        }
     }
 }
