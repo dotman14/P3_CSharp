@@ -19,7 +19,7 @@ namespace P3
         protected ElectionDataSet()
         {
             if (Data != null)
-                Clear();               //if the list is not empty, clear it
+                Clear(); //if the list is not empty, clear it
             
             //initialize a new list with the content of the CSV file
             Data =
@@ -49,10 +49,10 @@ namespace P3
          */
         protected internal void DisplayAllData()
         {
-            Display.GetMainHeader();                    //display the header
+            Display.GetMainHeader(); //display the header
             foreach (var i in Data)
-            {                                           //display the row, call the ToString 
-                Console.WriteLine("{0}", i);            //method of ElectionData object
+            {   //display the row, call the ToString 
+                Console.WriteLine("{0}", i); //method of ElectionData object
             }
         }
 
@@ -60,7 +60,7 @@ namespace P3
         {
             foreach (var get in list)
             {
-                Console.WriteLine(get);             //display each corresponding year entry found
+                Console.WriteLine(get);  //display each corresponding year entry found
             }
         }
 
@@ -118,16 +118,16 @@ namespace P3
          */
         protected void SearchByCounty(string county)
         {
-                                                        //search for the corresponding county if it exists
+            //search for the corresponding county if it exists
             var result =
                 Data.Where(results => results.Area == ElectionData.TitleCase(county.ToLower())).ToList();
 
-                                                        //if the county exists
+               //if the county exists
             if (result.Count() != 0)
             {
-                DisplaySomeData(result);                //display the county found
+                DisplaySomeData(result);//display the county found
             }
-            else                                        //if the county doesn't exit 
+            else   //if the county doesn't exit 
                 Console.WriteLine("\n**No County named {0}**", county);
         }
 
@@ -138,15 +138,15 @@ namespace P3
 
         protected void SearchByState(string state)
         {
-                                                        //search for the corresponding state
+            //search for the corresponding state
             var result =
                 Data.Where(results => results.State == ElectionData.TitleCase(state.ToLower())).ToList();
                                             
-            if (result.Count() != 0)                    //if the state exist
+            if (result.Count() != 0) //if the state exist
             {
-                DisplaySomeData(result);               //display each corresponding state entry found
+                DisplaySomeData(result); //display each corresponding state entry found
             }
-            else                                        //if the state doesn't exit  
+            else //if the state doesn't exit  
                 Console.WriteLine("\n**No State named {0}**", state);
         }
 
@@ -155,28 +155,28 @@ namespace P3
          * searched by the user. The method return an set ElectionData object if it exists.
          */
         protected void SearchByOffice(string office)
-        {                                               //search for the corresponding office
+        {                                               
             var result =
                 Data.Where(
                     results => results.Office == ElectionData.TitleCase(office.ToLower())).ToList();
 
-            if (result.Count() != 0)                    //if the office exist
+            if (result.Count() != 0)//if the office exist
             {
-                DisplaySomeData(result);                //Display correspondidng office found
+                DisplaySomeData(result);//Display correspondidng office found
             }
-            else                                        //if the office doesn't exit
+            else                   //if the office doesn't exit
                 Console.WriteLine("\n**No Office named {0}**", office);
         }
 
         protected void SearchByYear(string year)
-        {                                               //search for the corresponding year
+        {    //search for the corresponding year
             var result = Data.Where( results => results.Date == year.ToLower()).ToList();
 
-            if (result.Count() != 0)                    //if the year exist
+            if (result.Count() != 0) //if the year exist
             {
                 DisplaySomeData(result);
             }
-            else                                        //if the office doesn't exit
+            else //if the office doesn't exit
                 Console.WriteLine("\n**No election held in {0}**", year);
         }
     }
