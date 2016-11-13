@@ -25,8 +25,16 @@ namespace P3
             Data =
                 new ReadCsv().CsvContent.Select(
                     x =>
-                        new ElectionData(x[0], ElectionData.TitleCase(x[1].ToLower()), x[2].Substring(0, 4), x[3],
-                            Convert.ToInt32(x[4]), Convert.ToInt32(x[5]), x[6], Convert.ToInt32(x[7]), x[8])).ToList();
+                        new ElectionData(x[0], ElectionData.TitleCase(x[1].ToLower()), 
+                                        new DateTime(Convert.ToInt32(x[2].Substring(0, 4)), 
+                                                     Convert.ToInt32(x[2].Substring(4, 2)),
+                                                     Convert.ToInt32(x[2].Substring(6, 2))), 
+                                                     x[3],
+                                                     Convert.ToInt32(x[4]), 
+                                                     Convert.ToInt32(x[5]), 
+                                                     x[6], 
+                                                     Convert.ToInt32(x[7]), 
+                                                     x[8])).ToList();
         }
 
         /*Count method
@@ -73,10 +81,10 @@ namespace P3
         protected bool CheckUniqueData(string state, string county, string year, string office)
         {
             var result =
-                Data.Where(results => results.State == ElectionData.TitleCase(state) &&
-                                      results.Area == ElectionData.TitleCase(county) &&
-                                      results.Office == ElectionData.TitleCase(office) &&
-                                      results.Date == year);
+                Data.Where(results => results.State     == ElectionData.TitleCase(state) &&
+                                      results.Area      == ElectionData.TitleCase(county) &&
+                                      results.Office    == ElectionData.TitleCase(office) &&
+                                      results.Date.Year == Convert.ToInt32(year));
             return result.Any();
         }
 
@@ -89,10 +97,10 @@ namespace P3
         protected ElectionData GetSingleRow(string state, string county, string year, string office)
         {
             var result =
-                Data.FirstOrDefault(results =>  results.State == ElectionData.TitleCase(state) &&
-                                       results.Area == ElectionData.TitleCase(county) &&
-                                       results.Office == ElectionData.TitleCase(office) &&
-                                       results.Date == year);
+                Data.FirstOrDefault(results =>  results.State     == ElectionData.TitleCase(state) &&
+                                                results.Area      == ElectionData.TitleCase(county) &&
+                                                results.Office    == ElectionData.TitleCase(office) &&
+                                                results.Date.Year == Convert.ToInt32(year));
             return result;
         }
 
@@ -104,10 +112,10 @@ namespace P3
         protected int GetIndex(string state, string county, string year, string office)
         {
 
-            var index = Data.FindIndex(results => results.State == ElectionData.TitleCase(state) &&
-                                                  results.Area == ElectionData.TitleCase(county) &&
-                                                  results.Office == ElectionData.TitleCase(office) &&
-                                                  results.Date == year);
+            var index = Data.FindIndex(results => results.State     == ElectionData.TitleCase(state) &&
+                                                  results.Area      == ElectionData.TitleCase(county) &&
+                                                  results.Office    == ElectionData.TitleCase(office) &&
+                                                  results.Date.Year == Convert.ToInt32(year));
 
             return index;
         }
@@ -168,20 +176,20 @@ namespace P3
                 Console.WriteLine("\n**No Office named {0}**", office);
         }
 
-        protected void SearchByYear(string year)
+        protected void SearchByYear(int year)
         {    //search for the corresponding year
-            var result = Data.Where( results => results.Date == year.ToLower()).ToList();
+            var result = Data.Where( results => results.Date.Year == year).ToList();
 
             if (result.Count() != 0) //if the year exist
             {
                 DisplaySomeData(result);
             }
-            else //if the office doesn't exit
+            else //if the office doesn't exit 
                 Console.WriteLine("\n**No election held in {0}**", year);
         }
 
         //This method prints out all types of election
-        protected void allTypesOfElections()
+        protected void AllTypesOfElections()
         {
             var types = Data.Select(r => r.Office).Distinct().ToArray();
             Console.WriteLine(string.Join("/", types));

@@ -20,7 +20,7 @@ namespace P3
             {
                 case '1':                                       //search by type of election
                     Console.Write("\nType of Election: ");
-                    allTypesOfElections();
+                    AllTypesOfElections();
                     var office = Console.ReadLine();            //get the type of election from the user
                     Display.GetMainHeader();                    //display the header
                     SearchByOffice(office);                     //search the entries and display them
@@ -38,10 +38,18 @@ namespace P3
                     SearchByCounty(county);
                     break;
                 case '4':                                       //search by year
-                    Console.Write("\nYear of Election: Ex 2012");
-                    var year = Console.ReadLine();
-                    Display.GetMainHeader();
-                    SearchByYear(year);
+                    Console.Write("\nYear of Election (Example: 2012) ");
+                    var yearString = Console.ReadLine();
+                    int year;
+                    if(int.TryParse(yearString, out year) &&
+                       year > 0)
+                    {
+                        Display.GetMainHeader();
+                        SearchByYear(year);
+                    }
+                    else
+                        Console.Write("\nYear format is wrong\n");
+
                     break;
                 default:
                     Console.WriteLine("\nThis option does not exist");
@@ -183,13 +191,13 @@ namespace P3
                 Data.Where(results => area != null && results.Area == ElectionData.TitleCase(area.ToLower())).
                      Where(results => state != null && results.State == ElectionData.TitleCase(state.ToLower())).
                      Where(results => office != null && results.Office == ElectionData.TitleCase(office.ToLower())).
-                     Where(results => year != null && results.Date == year);
+                     Where(results => year != null && results.Date.Year == Convert.ToInt32(year));
 
             if (!result.Any())                                  //if there is no duplicate
             {
                 var vote = republicanVotes + democraticVotes;   //determine the total votes
                                                                 //declare and initialize a new election data objet
-                var newElec = new ElectionData(office, state, year, area, vote, republicanVotes, republicanCandidate, democraticVotes, democraticCandidate);
+                var newElec = new ElectionData(office, state, new DateTime(Convert.ToInt32(year)), area, vote, republicanVotes, republicanCandidate, democraticVotes, democraticCandidate);
                 Add(newElec);                                   //add the object to the list
                 Console.WriteLine("\n Input Added\n");
                 Display.GetMainHeader();
