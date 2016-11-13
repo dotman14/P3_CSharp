@@ -20,12 +20,13 @@ namespace P3
             {
                 case '1':                                       //search by type of election
                     Console.Write("\nType of Election: ");
+                    allTypesOfElections();
                     var office = Console.ReadLine();            //get the type of election from the user
                     Display.GetMainHeader();                    //display the header
                     SearchByOffice(office);                     //search the entries and display them
                     break;
                 case '2':                                       //search by State
-                    Console.Write("\nName of State: ");         
+                    Console.Write("\nName of State: Ex. Indiana");         
                     var state = Console.ReadLine();             //get the state from the user
                     Display.GetMainHeader();                    
                     SearchByState(state);                       //search the entries and display them
@@ -37,7 +38,7 @@ namespace P3
                     SearchByCounty(county);
                     break;
                 case '4':                                       //search by year
-                    Console.Write("\nYear of Election: ");
+                    Console.Write("\nYear of Election: Ex 2012");
                     var year = Console.ReadLine();
                     Display.GetMainHeader();
                     SearchByYear(year);

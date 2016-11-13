@@ -179,5 +179,12 @@ namespace P3
             else //if the office doesn't exit
                 Console.WriteLine("\n**No election held in {0}**", year);
         }
+
+        //This method prints out all types of election
+        protected void allTypesOfElections()
+        {
+            var types = Data.Select(r => r.Office).Distinct().ToArray();
+            Console.WriteLine(string.Join("/", types));
+        } 
     }
 }
