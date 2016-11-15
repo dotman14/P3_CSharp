@@ -189,10 +189,10 @@ namespace P3
         }
 
         //This method prints out all types of election
-        protected void AllTypesOfElections()
+        protected string[] AllTypesOfElections()
         {
             var types = Data.Select(r => r.Office).Distinct().ToArray();
-            Console.WriteLine(string.Join("/", types));
+            return types;
         } 
     }
 }

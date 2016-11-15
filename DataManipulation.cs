@@ -21,14 +21,13 @@ namespace P3
             switch (searchByVariable) //switch on th user choice
             {
                 case '1': //search by type of election
-                    Console.Write("\nType of Election: ");
-                    AllTypesOfElections();
+                    Console.Write("\nType of Election: Ex...{0}: ", AllTypesOfElections());
                     var office = Console.ReadLine(); //get the type of election from the user
                     Display.GetMainHeader(); //display the header
                     SearchByOffice(office); //search the entries and display them
                     break;
                 case '2': //search by State
-                    Console.Write("\nName of State: Ex. Indiana");
+                    Console.Write("\nName of State: Ex... Indiana: ");
                     var state = Console.ReadLine(); //get the state from the user
                     Display.GetMainHeader();
                     SearchByState(state); //search the entries and display them
@@ -40,7 +39,7 @@ namespace P3
                     SearchByCounty(county);
                     break;
                 case '4': //search by year
-                    Console.Write("\nYear of Election (Example: 2012) ");
+                    Console.Write("\nYear of Election: Ex...2012: ");
                     var yearString = Console.ReadLine();
                     int year;
                     if (int.TryParse(yearString, out year) &&
