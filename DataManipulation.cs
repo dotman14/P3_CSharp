@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace P3
@@ -68,12 +69,25 @@ namespace P3
         public void Modify()
         {
             int newRepublicanVotes = 0, newDemocraticVotes = 0;
+            string state, county, office;
+            IEnumerable<ElectionData> result;
+            do
+            {
+                Console.Write("\nSelect State: "); //get the input from the user
+                state = Console.ReadLine();
+                result = Data.Where(results => results.State == state);
+                if(!result.Any())
+                    Console.WriteLine("Warning: State not in the Data set");
+            } while(!result.Any());
 
-            Console.Write("\nSelect State: "); //get the input from the user
-            var state = Console.ReadLine();
-
-            Console.Write("Select County: ");
-            var county = Console.ReadLine();
+            do
+            {
+                Console.Write("Select County: ");
+                county = Console.ReadLine();
+                result = Data.Where(results => results.Area == county);
+                if (!result.Any())
+                    Console.WriteLine("Warning: County not in the Data set");
+            } while (!result.Any());
 
             Console.Write("Year of Election: ");
             var yearString = Console.ReadLine();
@@ -84,12 +98,17 @@ namespace P3
             }
             catch (Exception e)
             {
-
                 Console.WriteLine(e.Message);
             }
 
-            Console.Write("Select Office: ");
-            var office = Console.ReadLine();
+            do
+            {
+                Console.Write("Select Office: ");
+                office = Console.ReadLine();
+                result = Data.Where(results => results.Office == office);
+                if (!result.Any())
+                    Console.WriteLine("Warning: Office not in the Data set");
+            } while (!result.Any());
 
             if (!CheckUniqueData(state, county, year, office))        //check if the entry exists
                 Console.WriteLine("There's no {0} election data for {1} County, {2}, in {3}", office, county, state, year);
