@@ -84,9 +84,9 @@ namespace P3
             {
                 Console.Write("Select County: ");
                 county = Console.ReadLine();
-                result = Data.Where(results => results.Area == county);
+                result = Data.Where(results => results.State == state && results.Area == county);
                 if (!result.Any())
-                    Console.WriteLine("Warning: County not in the Data set");
+                    Console.WriteLine("Warning: No county in {0} named {1}", state, county);
             } while (!result.Any());
 
             Console.Write("Year of Election: ");
