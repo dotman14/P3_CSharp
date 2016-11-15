@@ -94,7 +94,9 @@ namespace P3
             {
                 Console.Write("Select Office: ");
                 office = Console.ReadLine();
-                result = Data.Where(results => results.Office == office && results.State == state && results.Area == county).ToList();
+                result =
+                    Data.Where(results => results.Office == office && results.State == state && results.Area == county).
+                        ToList();
                 if (!result.Any())
                     Console.WriteLine("Warning: We have no {0} election for {1}, {2}", office, county, state);
             } while (!result.Any());
@@ -107,12 +109,12 @@ namespace P3
 
                 isValid = int.TryParse(yearString, out year);
                 if(isValid == false)
-                    Console.WriteLine("Year is invalid");
+                    Console.WriteLine("Year format is wrong. Ex. 2008");
                 if(year < 0)
-                    Console.WriteLine("Year must be greater than zero");
+                    Console.WriteLine("Year must be greater than zero.");
 
                 result =
-                    Data.Where(results => results.Office == office && results.State == state && results.Area == county).ToList();
+                    Data.Where(results => results.Office == office && results.State == state && results.Area == county && results.Date.Year == year).ToList();
                 if (!result.Any())
                     Console.WriteLine("Warning: We have no {0} election for {1}, {2} in {3}", office, county, state, year);
 
