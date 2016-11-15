@@ -43,7 +43,7 @@ namespace P3
                     Console.Write("\nYear of Election (Example: 2012) ");
                     var yearString = Console.ReadLine();
                     int year;
-                    if(int.TryParse(yearString, out year) &&
+                    if (int.TryParse(yearString, out year) &&
                        year > 0)
                     {
                         Display.GetMainHeader();
@@ -75,16 +75,16 @@ namespace P3
             do
             {
                 Console.Write("Select State: "); //get the input from the user
-                state = Console.ReadLine();
+                state = ElectionData.TitleCase(Console.ReadLine());
                 result = Data.Where(results => results.State == state).ToList();
-                if(!result.Any())
+                if (!result.Any())
                     Console.WriteLine("Warning: State not in the Data set");
-            } while(!result.Any());
+            } while (!result.Any());
 
             do
             {
                 Console.Write("Select County: ");
-                county = Console.ReadLine();
+                county = ElectionData.TitleCase(Console.ReadLine());
                 result = Data.Where(results => results.State == state && results.Area == county).ToList();
                 if (!result.Any())
                     Console.WriteLine("Warning: No county in {0} named {1}", state, county);
@@ -93,7 +93,7 @@ namespace P3
             do
             {
                 Console.Write("Select Office: ");
-                office = Console.ReadLine();
+                office = ElectionData.TitleCase(Console.ReadLine());
                 result =
                     Data.Where(results => results.Office == office && results.State == state && results.Area == county).
                         ToList();
@@ -108,16 +108,15 @@ namespace P3
                 var yearString = Console.ReadLine();
 
                 isValid = int.TryParse(yearString, out year);
-                if(isValid == false)
+                if (isValid == false)
                     Console.WriteLine("Year format is wrong. Ex. 2008");
-                if(year < 0)
+                if (year < 0)
                     Console.WriteLine("Year must be greater than zero.");
 
                 result =
                     Data.Where(results => results.Office == office && results.State == state && results.Area == county && results.Date.Year == year).ToList();
                 if (!result.Any())
                     Console.WriteLine("Warning: We have no {0} election for {1}, {2} in {3}", office, county, state, year);
-
 
             } while (year < 0 || isValid == false || !result.Any());
 
@@ -156,7 +155,7 @@ namespace P3
                         badInput = true;
                     }
                 } while (badInput);
-                                                        //if the input is good, we edit the entry
+                //if the input is good, we edit the entry
                 EditSingleElection(newRepublicanVotes, newDemocraticVotes, state, county, year, office);
 
                 Console.WriteLine("\n {0} {1} election data for {2} County, {3} has been edited.", year, office, county, state);
@@ -202,7 +201,7 @@ namespace P3
 
                     Console.WriteLine(e.Message);
                 }
-                
+
 
                 Console.Write("County name: ");
                 area = Console.ReadLine();
@@ -270,14 +269,14 @@ namespace P3
         private void EditSingleElection(int rVotes, int dVotes, string state, string county, int year, string office)
         {
             var index = GetIndex(state, county, year, office);    //get the index of the entry to modify 
-            if(index < 0)
+            if (index < 0)
             {
                 Console.WriteLine("Sorry, we have no data for that election");
                 return;
             }
             var beforeUpdate = GetSingleRow(state, county, year, office); //get the row to modify
 
-                                                            //create a new object with the modified data
+            //create a new object with the modified data
             var afterUpdate = new ElectionData(
                                                 beforeUpdate.Office,
                                                 beforeUpdate.State,
