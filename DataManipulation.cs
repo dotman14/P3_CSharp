@@ -140,7 +140,7 @@ namespace P3
         {
             string office;
             string state;
-            string year;
+            int year = 0;
             string area;
             var republicanVotes = 0;
             string republicanCandidate = null;
@@ -158,7 +158,18 @@ namespace P3
                 state = Console.ReadLine();
 
                 Console.Write("Year of Election: ");
-                year = Console.ReadLine();
+                var yearString = Console.ReadLine();
+                //int year = 0;
+                try
+                {
+                    year = Convert.ToInt32(yearString);
+                }
+                catch (Exception e)
+                {
+
+                    Console.WriteLine(e.Message);
+                }
+                
 
                 Console.Write("County name: ");
                 area = Console.ReadLine();
@@ -203,13 +214,13 @@ namespace P3
                 Data.Where(results => area != null && results.Area == ElectionData.TitleCase(area.ToLower())).
                      Where(results => state != null && results.State == ElectionData.TitleCase(state.ToLower())).
                      Where(results => office != null && results.Office == ElectionData.TitleCase(office.ToLower())).
-                     Where(results => year != null && results.Date.Year == Convert.ToInt32(year));
+                     Where(results => results.Date.Year == year);
 
             if (!result.Any())                                  //if there is no duplicate
             {
                 var vote = republicanVotes + democraticVotes;   //determine the total votes
                                                                 //declare and initialize a new election data objet
-                var newElec = new ElectionData(office, state, new DateTime(Convert.ToInt32(year)), area, vote, republicanVotes, republicanCandidate, democraticVotes, democraticCandidate);
+                var newElec = new ElectionData(office, state, DateTime.ParseExact(year.ToString(), "yyyymmdd", null), area, vote, republicanVotes, republicanCandidate, democraticVotes, democraticCandidate);
                 Add(newElec);                                   //add the object to the list
                 Console.WriteLine("\n Input Added\n");
                 Display.GetMainHeader();
