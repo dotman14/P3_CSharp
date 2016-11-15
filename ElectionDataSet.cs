@@ -78,13 +78,13 @@ namespace P3
          * is unique.
          * The method return true if a entry as been found or false if not
          */
-        protected bool CheckUniqueData(string state, string county, string year, string office)
+        protected bool CheckUniqueData(string state, string county, int year, string office)
         {
             var result =
                 Data.Where(results => results.State     == ElectionData.TitleCase(state) &&
                                       results.Area      == ElectionData.TitleCase(county) &&
                                       results.Office    == ElectionData.TitleCase(office) &&
-                                      results.Date.Year == Convert.ToInt32(year));
+                                      results.Date.Year == year);
             return result.Any();
         }
 
@@ -94,13 +94,13 @@ namespace P3
          * area and office is unique.
          * The method return an ElectionData object if it exist
          */
-        protected ElectionData GetSingleRow(string state, string county, string year, string office)
+        protected ElectionData GetSingleRow(string state, string county, int year, string office)
         {
             var result =
                 Data.FirstOrDefault(results =>  results.State     == ElectionData.TitleCase(state) &&
                                                 results.Area      == ElectionData.TitleCase(county) &&
                                                 results.Office    == ElectionData.TitleCase(office) &&
-                                                results.Date.Year == Convert.ToInt32(year));
+                                                results.Date.Year == year);
             return result;
         }
 
@@ -109,13 +109,13 @@ namespace P3
          * If the data exist it should be unique because the association of the attribute state, 
          * area and office is unique.
          */
-        protected int GetIndex(string state, string county, string year, string office)
+        protected int GetIndex(string state, string county, int year, string office)
         {
 
             var index = Data.FindIndex(results => results.State     == ElectionData.TitleCase(state) &&
                                                   results.Area      == ElectionData.TitleCase(county) &&
                                                   results.Office    == ElectionData.TitleCase(office) &&
-                                                  results.Date.Year == Convert.ToInt32(year));
+                                                  results.Date.Year == year);
 
             return index;
         }

@@ -10,34 +10,35 @@ namespace P3
          * Hence the user can search for a specific county, a specific State or a specific 
          * kind of election.
          */
+
         public void Search()
         {
-            Display.SearchByOptions();                          //display the menu
+            Display.SearchByOptions(); //display the menu
             Console.Write("\nSearch data by: ");
-            var searchByVariable = Console.ReadKey().KeyChar;   //get the input of the user
+            var searchByVariable = Console.ReadKey().KeyChar; //get the input of the user
 
-            switch (searchByVariable)                           //switch on th user choice
+            switch (searchByVariable) //switch on th user choice
             {
-                case '1':                                       //search by type of election
+                case '1': //search by type of election
                     Console.Write("\nType of Election: ");
                     AllTypesOfElections();
-                    var office = Console.ReadLine();            //get the type of election from the user
-                    Display.GetMainHeader();                    //display the header
-                    SearchByOffice(office);                     //search the entries and display them
+                    var office = Console.ReadLine(); //get the type of election from the user
+                    Display.GetMainHeader(); //display the header
+                    SearchByOffice(office); //search the entries and display them
                     break;
-                case '2':                                       //search by State
-                    Console.Write("\nName of State: Ex. Indiana");         
-                    var state = Console.ReadLine();             //get the state from the user
-                    Display.GetMainHeader();                    
-                    SearchByState(state);                       //search the entries and display them
+                case '2': //search by State
+                    Console.Write("\nName of State: Ex. Indiana");
+                    var state = Console.ReadLine(); //get the state from the user
+                    Display.GetMainHeader();
+                    SearchByState(state); //search the entries and display them
                     break;
-                case '3':                                       //search by county
+                case '3': //search by county
                     Console.Write("\nName of County: ");
                     var county = Console.ReadLine();
                     Display.GetMainHeader();
                     SearchByCounty(county);
                     break;
-                case '4':                                       //search by year
+                case '4': //search by year
                     Console.Write("\nYear of Election (Example: 2012) ");
                     var yearString = Console.ReadLine();
                     int year;
@@ -63,18 +64,29 @@ namespace P3
          * will always return a unique result.
          * The user is only allowed to modify the number of votes for democrat and republican.
          */
+
         public void Modify()
         {
             int newRepublicanVotes = 0, newDemocraticVotes = 0;
 
-            Console.Write("\nSelect State: ");                  //get the input from the user
+            Console.Write("\nSelect State: "); //get the input from the user
             var state = Console.ReadLine();
 
             Console.Write("Select County: ");
             var county = Console.ReadLine();
 
             Console.Write("Year of Election: ");
-            var year = Console.ReadLine();
+            var yearString = Console.ReadLine();
+            int year = 0;
+            try
+            {
+                year = Convert.ToInt32(yearString);
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
 
             Console.Write("Select Office: ");
             var office = Console.ReadLine();
@@ -211,7 +223,7 @@ namespace P3
          * this method allow to edit an entry of the List of ElectionData object
          */
 
-        private void EditSingleElection(int rVotes, int dVotes, string state, string county, string year, string office)
+        private void EditSingleElection(int rVotes, int dVotes, string state, string county, int year, string office)
         {
             var index = GetIndex(state, county, year, office);    //get the index of the entry to modify 
             if(index < 0)
