@@ -70,10 +70,11 @@ namespace P3
         {
             int newRepublicanVotes = 0, newDemocraticVotes = 0;
             string state, county, office;
+            int year = 0;
             IEnumerable<ElectionData> result;
             do
             {
-                Console.Write("\nSelect State: "); //get the input from the user
+                Console.Write("Select State: "); //get the input from the user
                 state = Console.ReadLine();
                 result = Data.Where(results => results.State == state);
                 if(!result.Any())
@@ -89,26 +90,31 @@ namespace P3
                     Console.WriteLine("Warning: No county in {0} named {1}", state, county);
             } while (!result.Any());
 
-            Console.Write("Year of Election: ");
-            var yearString = Console.ReadLine();
-            int year = 0;
-            try
-            {
-                year = Convert.ToInt32(yearString);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
             do
             {
                 Console.Write("Select Office: ");
                 office = Console.ReadLine();
-                result = Data.Where(results => results.Office == office);
+                result = Data.Where(results => results.Office == office && results.State == state && results.Area == county);
                 if (!result.Any())
-                    Console.WriteLine("Warning: Office not in the Data set");
+                    Console.WriteLine("Warning: We have no {0} election for {1}, {2}", office, county, state);
             } while (!result.Any());
+
+            bool isValid;
+            do
+            {
+                Console.Write("Year of Election: ");
+                var yearString = Console.ReadLine();
+
+                isValid = int.TryParse(yearString, out year);
+                if(isValid == false)
+                    Console.WriteLine("Year is invalid");
+                if(year < 0)
+                    Console.WriteLine("Year must be greater than zero");
+                
+            } while (year < 0 || isValid == false);
+
+
+
 
             if (!CheckUniqueData(state, county, year, office))        //check if the entry exists
                 Console.WriteLine("There's no {0} election data for {1} County, {2}, in {3}", office, county, state, year);
