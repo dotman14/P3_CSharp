@@ -187,7 +187,6 @@ namespace P3
             else //if the office doesn't exit 
                 Console.WriteLine("\n**No election held in {0}**", year);
         }
-
         //This method prints out all types of election
         protected string[] AllTypesOfElections()
         {
