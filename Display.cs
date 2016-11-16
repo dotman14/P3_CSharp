@@ -13,8 +13,20 @@ namespace P3
             Console.WriteLine("2. Modify Dataset");
             Console.WriteLine("3. Search Dataset");
             Console.WriteLine("4. Display Dataset Count");
+            Console.WriteLine("5. LINQ Queries");
             Console.WriteLine("5. Exit");
             Console.WriteLine("----------------------------------");
+        }
+
+        public static void LinqOptions()
+        {
+            Console.WriteLine("\n1. Total Number of Votes");
+            Console.WriteLine("2. Total Number of Republican Votes");
+            Console.WriteLine("3. Total Number of Democratic Votes");
+            Console.WriteLine("4. Widest winning margin by any Candidate");
+            Console.WriteLine("5. Votes percentage by State");
+            Console.WriteLine("6. Votes percentage by Year");
+            Console.WriteLine("7. Percentage Voter Increase");
         }
 
         //search display function

@@ -46,6 +46,9 @@ namespace P3
                         case 5:                         //exit the program
                             response = true;
                             break;
+                        case 6:                         //exit the program
+                            response = true;
+                            break;
                     }
                 }
             }

@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="DataManipulation.cs" />
     <Compile Include="ElectionDataSet.cs" />
+    <Compile Include="Linq.cs" />
     <Compile Include="ReadCSV.cs" />
     <Compile Include="Display.cs" />
     <Compile Include="ElectionData.cs" />
