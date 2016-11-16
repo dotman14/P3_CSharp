@@ -30,13 +30,13 @@ namespace P3
          */
         public DateTime Date { get; }
         public string Republican { get; }
-        private int RepublicanVote { get; }
+        public int RepublicanVote { get; }
         public string Democrat { get; }
-        private int DemocratVote { get; }
+        public int DemocratVote { get; }
         public string Area { get; }
         public string State { get; }
         public string Office { get; }
-        private int Total { get; }
+        public int Total { get; }
         public static string TitleCase(string str)
         {
             return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(str);
