@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace P3
 {
@@ -52,10 +49,9 @@ namespace P3
 
         private void VotePercentageYear()
         {
-            int year;
-            Console.WriteLine("Input the year:");
-            year = Convert.ToInt32(Console.ReadLine());
-            var percentYear = from c in Data
+            Console.Write("Input the year: ");
+            var year = Convert.ToInt32(Console.ReadLine());
+            var percentYear = from  c in Data
                               where c.Date.Year == year
                               group c by c.Date.Year
                               into prYr
@@ -68,7 +64,7 @@ namespace P3
             if (percentYear.Any())
             {
                 foreach (var per in percentYear)
-                    Console.WriteLine("{0,6} => Democrate: {1:0.00}%, Republican: {2:0.00}%", per.year, per.stateDemPer, per.stateRepPer);
+                    Console.WriteLine("{0,6} => Democrate: {1:0.00}%, Republican: {2:0.00}%, Other Votes {3:0.00}%", per.year, per.stateDemPer, per.stateRepPer, 100 - (per.stateDemPer + per.stateRepPer));
             }
             else
                 Console.WriteLine("No Data for the year {0}", year);
@@ -77,12 +73,12 @@ namespace P3
         private void VotePercentageState()
         {
             int year;
-            Console.WriteLine("Input the year:");
+            Console.Write("Input the year: ");
             year = Convert.ToInt32(Console.ReadLine());
             var percent = from c in Data
                           where c.Date.Year == year
                           group c by c.State
-                into pr
+                          into pr
                           select new
                           {
                               stateName = pr.Key,
@@ -92,7 +88,7 @@ namespace P3
             if (percent.Any())
             {
                 foreach (var per in percent)
-                    Console.WriteLine("{0,20} => Democrate: {1:0.00}%, Republican: {2:0.00}%", per.stateName, per.stateDemPer, per.stateRepPer);
+                    Console.WriteLine("{0,20} => Democrate: {1:0.00}%, Republican: {2:0.00}% Others: {3:0.00}%", per.stateName, per.stateDemPer, per.stateRepPer, 100 - (per.stateDemPer + per.stateRepPer));
             }
             else
                 Console.WriteLine("No Data for the year {0}", year);
@@ -100,10 +96,9 @@ namespace P3
 
         private void TotalRepublicanVotes()
         {
-            int year;
-            Console.WriteLine("Input the year:");
-            year = Convert.ToInt32(Console.ReadLine());
-            var name = from c in Data
+            Console.Write("Input the year: ");
+            var year = Convert.ToInt32(Console.ReadLine());
+            var name = from  c in Data
                        where c.Date.Year == year
                        group c by c.Republican into nm
                        select nm.Key;
@@ -115,7 +110,7 @@ namespace P3
             {
                 int num = result.Sum(r => r.RepublicanVote);
 
-                Console.WriteLine("In {0}, {1} persons voted for", year, num);
+                Console.Write("In {0}, {1} people voted for ", year, num);
                 foreach (var s in name)
                     Console.WriteLine(s);
             }
@@ -127,7 +122,7 @@ namespace P3
         private void TotalDemocraticVotes()
         {
             int year;
-            Console.WriteLine("Input the year:");
+            Console.Write("Input the year: ");
             year = Convert.ToInt32(Console.ReadLine());
             var name = from c in Data
                        where c.Date.Year == year
@@ -141,7 +136,7 @@ namespace P3
             {
                 int num = result.Sum(r => r.DemocratVote);
 
-                Console.WriteLine("In {0}, {1} persons voted for", year, num);
+                Console.Write("In {0}, {1} persons voted for ", year, num);
                 foreach (var s in name)
                     Console.WriteLine(s);
             }
