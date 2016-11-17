@@ -22,7 +22,7 @@ namespace P3
             switch (searchByVariable) //switch on th user choice
             {
                 case '1': //search by type of election
-                    Console.Write("\nType of Election: Ex...{0}: ", AllTypesOfElections());
+                    Console.Write("\nSelect Office: Ex..(P)residential, (S)enate, (G)overnorship, (H)ouse of Rep: ");
                     var office = Console.ReadLine(); //get the type of election from the user
                     Display.GetMainHeader(); //display the header
                     SearchByOffice(office); //search the entries and display them
@@ -72,10 +72,14 @@ namespace P3
             string state, county, office;
             int year;
             List<ElectionData> result;
+
+            Console.WriteLine("\nEnter details for new election data below\nEnter -- (double hyphen/minus) at anytime to exit\n");
             do
             {
                 Console.Write("Select State: "); //get the input from the user
                 state = ElectionData.TitleCase(Console.ReadLine());
+                if (state == "--")
+                    return;
                 result = Data.Where(results => results.State == state).ToList();
                 if (!result.Any())
                     Console.WriteLine("Warning: State not in the Data set");
@@ -85,6 +89,8 @@ namespace P3
             {
                 Console.Write("Select County: ");
                 county = ElectionData.TitleCase(Console.ReadLine());
+                if (county == "--")
+                    return;
                 result = Data.Where(results => results.State == state && results.Area == county).ToList();
                 if (!result.Any())
                     Console.WriteLine("Warning: No county in {0} named {1}", state, county);
@@ -92,8 +98,10 @@ namespace P3
 
             do
             {
-                Console.Write("Select Office: ");
+                Console.Write("Select Office: Ex..{0}: ", AllTypesOfElections());
                 office = ElectionData.TitleCase(Console.ReadLine());
+                if (office == "--")
+                    return;
                 result =
                     Data.Where(results => results.Office == office && results.State == state && results.Area == county).
                         ToList();
@@ -106,6 +114,9 @@ namespace P3
             {
                 Console.Write("Year of Election: ");
                 var yearString = Console.ReadLine();
+
+                if (yearString == "--")
+                    return;
 
                 isValid = int.TryParse(yearString, out year);
                 if (isValid == false)

@@ -50,7 +50,7 @@ namespace P3
             }
         }
 
-        public void SameNameCounty()
+        private void SameNameCounty()
         {
             var duplicates = Data
                 .GroupBy(s => s.Area)

@@ -166,7 +166,8 @@ namespace P3
         {                                               
             var result =
                 Data.Where(
-                    results => results.Office == ElectionData.TitleCase(office.ToLower())).ToList();
+                    results => results.Office == ElectionData.TitleCase(office.ToLower()) ||
+                               results.Office[0] == char.ToUpper(office[0])).ToList();
 
             if (result.Count() != 0)//if the office exist
             {
