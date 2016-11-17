@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace P3
@@ -171,8 +172,8 @@ namespace P3
         {
             string office;
             string state;
-            int year;
             string area;
+            DateTime dateTime = new DateTime();
             int republicanVotes;
             string republicanCandidate;
             int democraticVotes;
@@ -184,9 +185,9 @@ namespace P3
             {
                 Console.Write("Election office: "); //get the input from the user
                 office = ElectionData.TitleCase(Console.ReadLine());
-                if(office == "--")
+                if (office == "--")
                     return;
-                if(string.IsNullOrEmpty(office))
+                if (string.IsNullOrEmpty(office))
                     Console.WriteLine("Office Name can not be empty or NULL");
             } while (string.IsNullOrEmpty(office));
 
@@ -200,21 +201,22 @@ namespace P3
                     Console.WriteLine("State Name can not be empty or NULL");
             } while (string.IsNullOrEmpty(state));
 
-            bool isValid;
+            bool isValidDate;
             do
             {
-                Console.Write("Year of Election: ");
+                Console.Write("Year of Election: (YYYYMMDD) ");
                 var yearString = Console.ReadLine();
                 if (yearString == "--")
                     return;
 
-                isValid = int.TryParse(yearString, out year);
-                if (isValid == false)
-                    Console.WriteLine("Year format is wrong. Ex. 2008");
-                if (year < 0)
-                    Console.WriteLine("Year must be greater than zero.");
-
-            } while (year < 0 || isValid == false);
+                DateTime temp;
+                isValidDate = DateTime.TryParseExact(yearString, "yyyyMMdd", CultureInfo.InvariantCulture,
+                    DateTimeStyles.None, out temp);
+                if (isValidDate)
+                    dateTime = temp;
+                else
+                    Console.WriteLine("Date has to be valid, in the format: YYYMMDD");
+            } while (isValidDate == false);
 
             do
             {
@@ -285,13 +287,13 @@ namespace P3
                 Data.Where(results => area != null && results.Area == ElectionData.TitleCase(area.ToLower())).
                      Where(results => state != null && results.State == ElectionData.TitleCase(state.ToLower())).
                      Where(results => office != null && results.Office == ElectionData.TitleCase(office.ToLower())).
-                     Where(results => results.Date.Year == year);
+                     Where(results => results.Date.Year == dateTime.Year);
 
             if (!result.Any())                                  //if there is no duplicate
             {
                 var vote = republicanVotes + democraticVotes;   //determine the total votes
                                                                 //declare and initialize a new election data objet
-                var newElec = new ElectionData(office, state, DateTime.ParseExact(year.ToString(), "yyyymmdd", null), area, vote, republicanVotes, republicanCandidate, democraticVotes, democraticCandidate);
+                var newElec = new ElectionData(office, state, dateTime, area, vote, republicanVotes, republicanCandidate, democraticVotes, democraticCandidate);
                 Add(newElec);                                   //add the object to the list
                 Console.WriteLine("\n Input Added\n");
                 Display.GetMainHeader();
