@@ -9,6 +9,7 @@ namespace P3
             try
             {
                 var manipulate = new DataManipulation();
+                var linq = new Linq();
                 var response = false;
                 while (response == false)
                 {
@@ -44,7 +45,8 @@ namespace P3
                             Console.Write("Dataset count {0}\n\n", manipulate.Count);
                             break;
                         case 5:                         //exit the program
-                            response = true;
+                            linq.LinQueries();
+                            
                             break;
                         case 6:                         //exit the program
                             response = true;
