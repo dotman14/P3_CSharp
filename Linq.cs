@@ -36,10 +36,10 @@ namespace P3
                     Console.WriteLine(SmallestWinningMargin().ToString());
                     break;
                 case '6':
-                    TotalVotes();
+                    VotePercentageState();
                     break;
                 case '7':
-                    TotalVotes();
+                    VotePercentageYear();
                     break;
                 case '8':
                     TotalVotes();
@@ -48,6 +48,54 @@ namespace P3
                     Console.WriteLine("That option does not exist.");
                     break;
             }
+        }
+
+        public void VotePercentageYear()
+        {
+            int year;
+            Console.WriteLine("Input the year:");
+            year = Convert.ToInt32(Console.ReadLine());
+            var percentYear = from c in Data
+                              where c.Date.Year == year
+                              group c by c.Date.Year
+                              into prYr
+                              select new
+                              {
+                                  year = prYr.Key,
+                                  stateDemPer = (Convert.ToDouble(prYr.Sum(c => c.DemocratVote)) / Convert.ToDouble(prYr.Sum(c => c.Total)) * 100),
+                                  stateRepPer = (Convert.ToDouble(prYr.Sum(c => c.RepublicanVote)) / Convert.ToDouble(prYr.Sum(c => c.Total)) * 100)
+                              };
+            if (percentYear.Any())
+            {
+                foreach (var per in percentYear)
+                    Console.WriteLine("{0,6} => Democrate: {1:0.00}%, Republican: {2:0.00}%", per.year, per.stateDemPer, per.stateRepPer);
+            }
+            else
+                Console.WriteLine("No Data for the year {0}", year);
+        }
+
+        public void VotePercentageState()
+        {
+            int year;
+            Console.WriteLine("Input the year:");
+            year = Convert.ToInt32(Console.ReadLine());
+            var percent = from c in Data
+                where c.Date.Year == year
+                group c by c.State
+                into pr
+                select new
+                {
+                    stateName = pr.Key,
+                    stateDemPer = ( Convert.ToDouble(pr.Sum(c => c.DemocratVote)) / Convert.ToDouble(pr.Sum(c=>c.Total))  *100),
+                    stateRepPer = (Convert.ToDouble(pr.Sum(c => c.RepublicanVote)) / Convert.ToDouble(pr.Sum(c => c.Total)) * 100)
+                };
+            if (percent.Any())
+            {
+                foreach (var per in percent)
+                    Console.WriteLine("{0,20} => Democrate: {1:0.00}%, Republican: {2:0.00}%", per.stateName, per.stateDemPer, per.stateRepPer);
+            }
+            else
+                Console.WriteLine("No Data for the year {0}", year);
         }
 
         public void TotalRepublicanVotes()
