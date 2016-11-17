@@ -52,19 +52,25 @@ namespace P3
 
         public void SameNameCounty()
         {
-            var duplicates = Data.GroupBy(s => s.Area)
+            var duplicates = Data
+                .GroupBy(s => s.Area)
                 .Where(s=>s.Count() > 1)
                 .SelectMany(grp => grp.Skip(0))
                 .OrderBy(s=>s.Area);
 
-            var distinct = duplicates.GroupBy(p => p.Area);
+            var distinct = duplicates
+                .GroupBy(p => p.Area)
+                .Select(group => new {
+                    county = group.Key,
+                    count = group.Count()
+                });
 
             foreach (var dist in distinct)
             {
-                Console.WriteLine("{0} can be found in {1}:",dist.Key);
+                Console.WriteLine("{0} can be found in {1} States:",dist.county, dist.count);
                 foreach (var dup in duplicates)
                 {
-                    if(dist.Key == dup.Area)
+                    if(dist.county == dup.Area)
                         Console.WriteLine("  - {0,8}",dup.State);
                 }
             }
