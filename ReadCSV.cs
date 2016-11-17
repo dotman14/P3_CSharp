@@ -1,4 +1,13 @@
-﻿using System;
+﻿/****************************** File Header ******************************\
+Module Name:  Display.cs
+Project:      US Election Data by County
+
+This is a static class used across the project to 
+display well formatted headers and menu options.
+
+\***************************************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
