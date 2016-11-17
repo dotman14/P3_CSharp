@@ -41,9 +41,32 @@ namespace P3
                     Console.WriteLine();
                     VotesPecentageByState();
                     break;
+                case '9':
+                    SameNameCounty();
+                    break;
                 default:
                     Console.WriteLine("That option does not exist.");
                     break;
+            }
+        }
+
+        public void SameNameCounty()
+        {
+            var duplicates = Data.GroupBy(s => s.Area)
+                .Where(s=>s.Count() > 1)
+                .SelectMany(grp => grp.Skip(0))
+                .OrderBy(s=>s.Area);
+
+            var distinct = duplicates.GroupBy(p => p.Area);
+
+            foreach (var dist in distinct)
+            {
+                Console.WriteLine("{0} can be found in {1}:",dist.Key);
+                foreach (var dup in duplicates)
+                {
+                    if(dist.Key == dup.Area)
+                        Console.WriteLine("  - {0,8}",dup.State);
+                }
             }
         }
 
