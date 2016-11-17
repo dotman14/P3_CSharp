@@ -13,34 +13,55 @@ namespace P3
             Display.LinqOptions();
 
             Console.Write("\nSelect your option: Ex...1: ");
-            var searchByVariable = Console.ReadKey().KeyChar;
+            var yearString = Console.ReadLine();
+            int year;
+
+            bool isValid = int.TryParse(yearString, out year);
+            if (isValid == false)
+                Console.WriteLine("You choose a wrong option is wrong. Ex. 2");
+            if (year < 0)
+                Console.WriteLine("Year must be greater than zero.");
             Console.WriteLine();
-            switch (searchByVariable)
+            switch (year)
             {
                 //case '1':
                 //    Console.WriteLine(TotalVotes());
                 //    break;
-                case '2':
+                case 2:
                     Console.WriteLine(TotalRepublicanVotes());
                     break;
-                case '3':
+                case 3:
                     Console.WriteLine(TotalDemocraticVotes());
                     break;
-                case '4':
+                case 4:
                     Display.GetMainHeader();
                     Console.WriteLine(WidestWinningMargin().ToString());
                     break;
-                case '5':
+                case 5:
                     Display.GetMainHeader();
                     Console.WriteLine(SmallestWinningMargin().ToString());
                     break;
-                case '6':
+                case 6:
+                    //foreach (var state in VotesPecentageByState())
+                    //{
+                    //    Console.WriteLine(state.ToString());
+                    //    foreach (var results in state)
+                    //    {
+                    //        Console.WriteLine(" {0}", results);
+                    //    }
+                    //}
+                    VotesPecentageByState();
+                    break;
+                case 7:
                     TotalVotes();
                     break;
-                case '7':
+                case 8:
                     TotalVotes();
                     break;
-                case '8':
+                case 9:
+                    TotalVotes();
+                    break;
+                case 10:
                     TotalVotes();
                     break;
                 default:
@@ -85,6 +106,31 @@ namespace P3
                    FirstOrDefault();
 
             return Data[result.index];
+        }
+
+        private void VotesPecentageByState()
+        {
+            var res  = Data.GroupBy(r => r.State)
+                           .Select(
+                                group => new
+                                {
+                                    State = group.Key,
+                                    Results = group.OrderByDescending(p => p.Total)
+                                    .Take(3)
+                                })
+                           .ToList();
+
+
+            //var re1s = Data.GroupBy(r => r.State).Select(x => x.OrderByDescending(p => p.Total).Take(3)).ToArray();
+
+            foreach (var x in res)
+            {
+                Console.WriteLine(x.State);
+                foreach (var c in x.Results)
+                {
+                    Console.WriteLine(c);
+                }
+            }
         }
     }
 }

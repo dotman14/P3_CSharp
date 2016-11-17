@@ -30,6 +30,8 @@ namespace P3
             Console.WriteLine("7. Votes percentage by Year");
             Console.WriteLine("8. Percentage Voter Increase");
             Console.WriteLine("9. Total Number of Voter Increase");
+            Console.WriteLine("10. Top 3 votes overall");
+            Console.WriteLine("11. Bottom 3 votes overall");
         }
 
         //search display function
