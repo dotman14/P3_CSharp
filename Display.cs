@@ -21,17 +21,14 @@ namespace P3
         
         public static void LinqOptions()
         {
-            //Console.WriteLine("\n1. Total Number of Votes");
-            Console.WriteLine("2. Total Number of Republican Votes");
-            Console.WriteLine("3. Total Number of Democratic Votes");
-            Console.WriteLine("4. Biggest winning margin by any Candidate");
-            Console.WriteLine("5. Smallest winning margin by any Candidate");
-            Console.WriteLine("6. Votes percentage by State");
-            Console.WriteLine("7. Votes percentage by Year");
-            Console.WriteLine("8. Percentage Voter Increase");
-            Console.WriteLine("9. Total Number of Voter Increase");
-            Console.WriteLine("10. Top 3 votes overall");
-            Console.WriteLine("11. Bottom 3 votes overall");
+            Console.WriteLine("\n1. Total Number of Republican Votes");
+            Console.WriteLine("2. Total Number of Democratic Votes");
+            Console.WriteLine("3. Biggest winning margin by any Candidate");
+            Console.WriteLine("4. Smallest winning margin by any Candidate");
+            Console.WriteLine("5. Votes percentage by State");
+            Console.WriteLine("6. Votes percentage by Year");
+            Console.WriteLine("7. Percentage Voter Increase");
+            Console.WriteLine("8. Top 3 total votes in each State");
         }
 
         //search display function

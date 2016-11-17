@@ -13,56 +13,36 @@ namespace P3
             Display.LinqOptions();
 
             Console.Write("\nSelect your option: Ex...1: ");
-            var yearString = Console.ReadLine();
-            int year;
-
-            bool isValid = int.TryParse(yearString, out year);
-            if (isValid == false)
-                Console.WriteLine("You choose a wrong option is wrong. Ex. 2");
-            if (year < 0)
-                Console.WriteLine("Year must be greater than zero.");
+            var searchByVariable = Console.ReadKey().KeyChar;
             Console.WriteLine();
-            switch (year)
+            switch (searchByVariable)
             {
-                //case '1':
-                //    Console.WriteLine(TotalVotes());
-                //    break;
-                case 2:
-                    Console.WriteLine(TotalRepublicanVotes());
+                case '1':
+                    TotalRepublicanVotes();
                     break;
-                case 3:
-                    Console.WriteLine(TotalDemocraticVotes());
+                case '2':
+                    TotalDemocraticVotes();
                     break;
-                case 4:
+                case '3':
                     Display.GetMainHeader();
                     Console.WriteLine(WidestWinningMargin().ToString());
                     break;
-                case 5:
+                case '4':
                     Display.GetMainHeader();
                     Console.WriteLine(SmallestWinningMargin().ToString());
                     break;
-                case 6:
-                    //foreach (var state in VotesPecentageByState())
-                    //{
-                    //    Console.WriteLine(state.ToString());
-                    //    foreach (var results in state)
-                    //    {
-                    //        Console.WriteLine(" {0}", results);
-                    //    }
-                    //}
+                case '5':
+                    VotePercentageState();
+                    break;
+                case '6':
+                    VotePercentageYear();
+                    break;
+                case '7':
+                    //VotePercentageYear();
+                    break;
+                case '8':
+                    Console.WriteLine();
                     VotesPecentageByState();
-                    break;
-                case 7:
-                    TotalVotes();
-                    break;
-                case 8:
-                    TotalVotes();
-                    break;
-                case 9:
-                    TotalVotes();
-                    break;
-                case 10:
-                    TotalVotes();
                     break;
                 default:
                     Console.WriteLine("That option does not exist.");
@@ -70,21 +50,109 @@ namespace P3
             }
         }
 
+        private void VotePercentageYear()
+        {
+            int year;
+            Console.WriteLine("Input the year:");
+            year = Convert.ToInt32(Console.ReadLine());
+            var percentYear = from c in Data
+                              where c.Date.Year == year
+                              group c by c.Date.Year
+                              into prYr
+                              select new
+                              {
+                                  year = prYr.Key,
+                                  stateDemPer = (Convert.ToDouble(prYr.Sum(c => c.DemocratVote)) / Convert.ToDouble(prYr.Sum(c => c.Total)) * 100),
+                                  stateRepPer = (Convert.ToDouble(prYr.Sum(c => c.RepublicanVote)) / Convert.ToDouble(prYr.Sum(c => c.Total)) * 100)
+                              };
+            if (percentYear.Any())
+            {
+                foreach (var per in percentYear)
+                    Console.WriteLine("{0,6} => Democrate: {1:0.00}%, Republican: {2:0.00}%", per.year, per.stateDemPer, per.stateRepPer);
+            }
+            else
+                Console.WriteLine("No Data for the year {0}", year);
+        }
+
+        private void VotePercentageState()
+        {
+            int year;
+            Console.WriteLine("Input the year:");
+            year = Convert.ToInt32(Console.ReadLine());
+            var percent = from c in Data
+                where c.Date.Year == year
+                group c by c.State
+                into pr
+                select new
+                {
+                    stateName = pr.Key,
+                    stateDemPer = ( Convert.ToDouble(pr.Sum(c => c.DemocratVote)) / Convert.ToDouble(pr.Sum(c=>c.Total))  *100),
+                    stateRepPer = (Convert.ToDouble(pr.Sum(c => c.RepublicanVote)) / Convert.ToDouble(pr.Sum(c => c.Total)) * 100)
+                };
+            if (percent.Any())
+            {
+                foreach (var per in percent)
+                    Console.WriteLine("{0,20} => Democrate: {1:0.00}%, Republican: {2:0.00}%", per.stateName, per.stateDemPer, per.stateRepPer);
+            }
+            else
+                Console.WriteLine("No Data for the year {0}", year);
+        }
+
+        private void TotalRepublicanVotes()
+        {
+            int year;
+            Console.WriteLine("Input the year:");
+            year = Convert.ToInt32(Console.ReadLine());
+            var name = from c in Data
+                       where c.Date.Year == year
+                       group c by c.Republican into nm
+                       select nm.Key;
+
+            var result = from n in Data
+                         where n.Date.Year == year
+                         select n;
+            if (name.Any())
+            {
+                int num = result.Sum(r => r.RepublicanVote);
+
+                Console.WriteLine("In {0}, {1} persons voted for", year, num);
+                foreach (var s in name)
+                    Console.WriteLine(s);
+            }
+            else
+                Console.WriteLine("No Data for the year {0}", year);
+
+        }
+
+        private void TotalDemocraticVotes()
+        {
+            int year;
+            Console.WriteLine("Input the year:");
+            year = Convert.ToInt32(Console.ReadLine());
+            var name = from c in Data
+                where c.Date.Year == year
+                group c by c.Democrat into nm
+                select nm.Key;
+                
+            var result = from n in Data
+                where n.Date.Year == year
+                select n;
+            if (name.Any())
+            {
+                int num = result.Sum(r => r.DemocratVote);
+
+                Console.WriteLine("In {0}, {1} persons voted for", year, num);
+                foreach (var s in name)
+                    Console.WriteLine(s);
+            }
+            else 
+                Console.WriteLine("No Data for the year {0}", year);
+            
+        }
+
         private int TotalVotes()
         {
             var result = Data.Sum(r => r.Total);
-            return result;
-        }
-
-        private int TotalRepublicanVotes()
-        {
-            var result = Data.Sum(r => r.RepublicanVote);
-            return result;
-        }
-
-        private int TotalDemocraticVotes()
-        {
-            var result = Data.Sum(r => r.DemocratVote);
             return result;
         }
 
@@ -110,7 +178,7 @@ namespace P3
 
         private void VotesPecentageByState()
         {
-            var res  = Data.GroupBy(r => r.State)
+            var res = Data.GroupBy(r => r.State)
                            .Select(
                                 group => new
                                 {
@@ -128,7 +196,7 @@ namespace P3
                 Console.WriteLine(x.State);
                 foreach (var c in x.Results)
                 {
-                    Console.WriteLine(c);
+                    Console.WriteLine(" - {0}", c);
                 }
             }
         }
