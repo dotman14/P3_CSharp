@@ -188,10 +188,10 @@ namespace P3
                 Console.WriteLine("\n**No election held in {0}**", year);
         }
         //This method prints out all types of election
-        protected List<string> AllTypesOfElections()
+        protected string AllTypesOfElections()
         {
             var types = Data.Select(r => r.Office).Distinct().ToArray();
-            return types.ToList();
+            return string.Join("/", types);
         } 
     }
 }
