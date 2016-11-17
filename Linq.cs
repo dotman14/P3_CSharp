@@ -21,10 +21,11 @@ namespace P3
                 //    Console.WriteLine(TotalVotes());
                 //    break;
                 case '2':
-                    Console.WriteLine(TotalRepublicanVotes());
+                    TotalRepublicanVotes();
                     break;
                 case '3':
-                    Console.WriteLine(TotalDemocraticVotes());
+                    //Console.WriteLine(TotalDemocraticVotes());
+                    TotalDemocraticVotes();
                     break;
                 case '4':
                     Display.GetMainHeader();
@@ -49,13 +50,65 @@ namespace P3
             }
         }
 
+        public void TotalRepublicanVotes()
+        {
+            int year;
+            Console.WriteLine("Input the year:");
+            year = Convert.ToInt32(Console.ReadLine());
+            var name = from c in Data
+                       where c.Date.Year == year
+                       group c by c.Republican into nm
+                       select nm.Key;
+
+            var result = from n in Data
+                         where n.Date.Year == year
+                         select n;
+            if (name.Any())
+            {
+                int num = result.Sum(r => r.RepublicanVote);
+
+                Console.WriteLine("In {0}, {1} persons voted for", year, num);
+                foreach (var s in name)
+                    Console.WriteLine(s);
+            }
+            else
+                Console.WriteLine("No Data for the year {0}", year);
+
+        }
+
+        public void TotalDemocraticVotes()
+        {
+            int year;
+            Console.WriteLine("Input the year:");
+            year = Convert.ToInt32(Console.ReadLine());
+            var name = from c in Data
+                where c.Date.Year == year
+                group c by c.Democrat into nm
+                select nm.Key;
+                
+            var result = from n in Data
+                where n.Date.Year == year
+                select n;
+            if (name.Any())
+            {
+                int num = result.Sum(r => r.DemocratVote);
+
+                Console.WriteLine("In {0}, {1} persons voted for", year, num);
+                foreach (var s in name)
+                    Console.WriteLine(s);
+            }
+            else 
+                Console.WriteLine("No Data for the year {0}", year);
+            
+        }
+
         private int TotalVotes()
         {
             var result = Data.Sum(r => r.Total);
             return result;
         }
 
-        private int TotalRepublicanVotes()
+        /*private int TotalRepublicanVotes()
         {
             var result = Data.Sum(r => r.RepublicanVote);
             return result;
@@ -65,7 +118,7 @@ namespace P3
         {
             var result = Data.Sum(r => r.DemocratVote);
             return result;
-        }
+        }*/
 
         private ElectionData WidestWinningMargin()
         {
