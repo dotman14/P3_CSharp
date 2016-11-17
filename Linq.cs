@@ -9,7 +9,7 @@ namespace P3
         {
             Display.LinqOptions();
 
-            Console.Write("\nSelect your option: Ex...1: ");
+            Console.Write("\nSelect LINQ Query option: Ex...1: ");
             var searchByVariable = Console.ReadKey().KeyChar;
             Console.WriteLine();
             switch (searchByVariable)

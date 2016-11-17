@@ -171,74 +171,114 @@ namespace P3
         {
             string office;
             string state;
-            int year = 0;
+            int year;
             string area;
-            var republicanVotes = 0;
-            string republicanCandidate = null;
-            var democraticVotes = 0;
-            string democraticCandidate = null;
+            int republicanVotes;
+            string republicanCandidate;
+            int democraticVotes;
+            string democraticCandidate;
 
-            bool badInput;
+            Console.WriteLine("\nEnter details for new election data below\nEnter -- (double hyphen/minus) at anytime to exit\n");
+
             do
-            {                               //take the input from the user until we get good inputs
-                badInput = false;
-                Console.Write("\nElection office: ");
-                office = Console.ReadLine();
+            {
+                Console.Write("Election office: "); //get the input from the user
+                office = ElectionData.TitleCase(Console.ReadLine());
+                if(office == "--")
+                    return;
+                if(string.IsNullOrEmpty(office))
+                    Console.WriteLine("Office Name can not be empty or NULL");
+            } while (string.IsNullOrEmpty(office));
 
-                Console.Write("State name: ");
-                state = Console.ReadLine();
+            do
+            {
+                Console.Write("State name: "); //get the input from the user
+                state = ElectionData.TitleCase(Console.ReadLine());
+                if (state == "--")
+                    return;
+                if (string.IsNullOrEmpty(state))
+                    Console.WriteLine("State Name can not be empty or NULL");
+            } while (string.IsNullOrEmpty(state));
 
+            bool isValid;
+            do
+            {
                 Console.Write("Year of Election: ");
                 var yearString = Console.ReadLine();
-                //int year = 0;
-                try
-                {
-                    year = Convert.ToInt32(yearString);
-                }
-                catch (Exception e)
-                {
+                if (yearString == "--")
+                    return;
 
-                    Console.WriteLine(e.Message);
-                }
+                isValid = int.TryParse(yearString, out year);
+                if (isValid == false)
+                    Console.WriteLine("Year format is wrong. Ex. 2008");
+                if (year < 0)
+                    Console.WriteLine("Year must be greater than zero.");
+
+            } while (year < 0 || isValid == false);
+
+            do
+            {
+                Console.Write("County name: "); //get the input from the user
+                area = ElectionData.TitleCase(Console.ReadLine());
+                if (area == "--")
+                    return;
+                if (string.IsNullOrEmpty(area))
+                    Console.WriteLine("County Name can not be empty or NULL");
+            } while (string.IsNullOrEmpty(area));
 
 
-                Console.Write("County name: ");
-                area = Console.ReadLine();
-
+            bool isRepVotesValid;
+            do
+            {
                 Console.Write("Republican votes: ");
-                try
-                {                                           //check if the input is an positif integer 
-                    republicanVotes = Convert.ToInt32(Console.ReadLine());
-                    if (republicanVotes < 0)
-                        throw new ArgumentOutOfRangeException();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    badInput = true;
-                    continue;
-                }
+                var repVoteString = Console.ReadLine();
+                if (repVoteString == "--")
+                    return;
+                isRepVotesValid = int.TryParse(repVoteString, out republicanVotes);
+                if (isRepVotesValid == false)
+                    Console.WriteLine("Number of votes MUST be an integer. Ex. 1234");
+                if (republicanVotes < 0)
+                    Console.WriteLine("Number of votes MUST be greater than zero.");
 
-                Console.Write("Republican Candidate Name: ");
-                republicanCandidate = Console.ReadLine();
+            } while (republicanVotes < 0 || isRepVotesValid == false);
 
-                Console.Write("Democrat votes: ");
-                try
-                {                                           //check if the input is an positif integer
-                    democraticVotes = Convert.ToInt32(Console.ReadLine());
-                    if (democraticVotes < 0)
-                        throw new ArgumentOutOfRangeException();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    badInput = true;
-                    continue;
-                }
 
-                Console.Write("Democrat Candidate Name: ");
-                democraticCandidate = Console.ReadLine();
-            } while (badInput);
+            do
+            {
+                Console.Write("Republican Candidate Name: "); //get the input from the user
+                republicanCandidate = ElectionData.TitleCase(Console.ReadLine());
+                if (republicanCandidate == "--")
+                    return;
+                if (string.IsNullOrEmpty(republicanCandidate))
+                    Console.WriteLine("Republican Candidate Name can not be empty or NULL");
+            } while (string.IsNullOrEmpty(republicanCandidate));
+
+
+            bool isDemVotesValid;
+            do
+            {
+                Console.Write("Republican votes: ");
+                var demVoteString = Console.ReadLine();
+                if (demVoteString == "--")
+                    return;
+                isDemVotesValid = int.TryParse(demVoteString, out democraticVotes);
+                if (isDemVotesValid == false)
+                    Console.WriteLine("Number of votes MUST be an integer. Ex. 1234");
+                if (republicanVotes < 0)
+                    Console.WriteLine("Number of votes MUST be greater than zero.");
+
+            } while (democraticVotes < 0 || isDemVotesValid == false);
+
+
+            do
+            {
+                Console.Write("Democrat Candidate Name: "); //get the input from the user
+                democraticCandidate = ElectionData.TitleCase(Console.ReadLine());
+                if (democraticCandidate == "--")
+                    return;
+                if (string.IsNullOrEmpty(democraticCandidate))
+                    Console.WriteLine("Democrat Candidate Name can not be empty or NULL");
+            } while (string.IsNullOrEmpty(democraticCandidate));
 
             //check if there is any duplicate
             var result =
