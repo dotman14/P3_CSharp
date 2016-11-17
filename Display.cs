@@ -18,7 +18,6 @@ namespace P3
             Console.WriteLine("----------------------------------");
         }
 
-        
         public static void LinqOptions()
         {
             Console.WriteLine("\n1. Total Number of Republican Votes");
@@ -39,14 +38,6 @@ namespace P3
             Console.WriteLine("2. State");
             Console.WriteLine("3. County");
             Console.WriteLine("4. Year");
-        }
-
-        //Modify display function
-        public static void CountyToModify()
-        {
-            Console.WriteLine("\nYou can modify the following data: ");
-            Console.WriteLine("1. County");
-            Console.WriteLine("2. State");
         }
 
         //Display the main header 
