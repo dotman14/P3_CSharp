@@ -1,10 +1,15 @@
 ﻿/****************************** File Header ******************************\
-Module Name:  Display.cs
+File Name:    ReadCSV.cs
 Project:      US Election Data by County
 
-This is a static class used across the project to 
-display well formatted headers and menu options.
+This class reads CSV data from a URL.
+It parses it first by splitting on at every line breaks,
+then at every comma.
 
+For the purpose of this project, we selected only the indexes we need.
+If this does not fit your purpose, feel feel to adjust these index in indexWeNeed variable.
+
+A List of String Array is returned from the CSVContent property.
 \***************************************************************************/
 
 using System;
