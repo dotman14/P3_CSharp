@@ -17,32 +17,32 @@ namespace P3
             Console.WriteLine();
             switch (searchByVariable)
             {
-                case '1':
+                //case '1':
+                //    Console.WriteLine(TotalVotes());
+                //    break;
+                case '2':
                     TotalRepublicanVotes();
                     break;
-                case '2':
-                    TotalDemocraticVotes();
-                    break;
                 case '3':
-                    Display.GetMainHeader();
-                    Console.WriteLine(WidestWinningMargin().ToString());
+                    //Console.WriteLine(TotalDemocraticVotes());
+                    TotalDemocraticVotes();
                     break;
                 case '4':
                     Display.GetMainHeader();
-                    Console.WriteLine(SmallestWinningMargin().ToString());
+                    Console.WriteLine(WidestWinningMargin().ToString());
                     break;
                 case '5':
-                    VotePercentageState();
+                    Display.GetMainHeader();
+                    Console.WriteLine(SmallestWinningMargin().ToString());
                     break;
                 case '6':
-                    VotePercentageYear();
+                    VotePercentageState();
                     break;
                 case '7':
-                    //VotePercentageYear();
+                    VotePercentageYear();
                     break;
                 case '8':
-                    Console.WriteLine();
-                    VotesPecentageByState();
+                    TotalVotes();
                     break;
                 default:
                     Console.WriteLine("That option does not exist.");
@@ -50,7 +50,7 @@ namespace P3
             }
         }
 
-        private void VotePercentageYear()
+        public void VotePercentageYear()
         {
             int year;
             Console.WriteLine("Input the year:");
@@ -74,7 +74,7 @@ namespace P3
                 Console.WriteLine("No Data for the year {0}", year);
         }
 
-        private void VotePercentageState()
+        public void VotePercentageState()
         {
             int year;
             Console.WriteLine("Input the year:");
@@ -98,7 +98,7 @@ namespace P3
                 Console.WriteLine("No Data for the year {0}", year);
         }
 
-        private void TotalRepublicanVotes()
+        public void TotalRepublicanVotes()
         {
             int year;
             Console.WriteLine("Input the year:");
@@ -124,7 +124,7 @@ namespace P3
 
         }
 
-        private void TotalDemocraticVotes()
+        public void TotalDemocraticVotes()
         {
             int year;
             Console.WriteLine("Input the year:");
@@ -156,6 +156,18 @@ namespace P3
             return result;
         }
 
+        /*private int TotalRepublicanVotes()
+        {
+            var result = Data.Sum(r => r.RepublicanVote);
+            return result;
+        }
+
+        private int TotalDemocraticVotes()
+        {
+            var result = Data.Sum(r => r.DemocratVote);
+            return result;
+        }*/
+
         private ElectionData WidestWinningMargin()
         {
             var result =
@@ -174,31 +186,6 @@ namespace P3
                    FirstOrDefault();
 
             return Data[result.index];
-        }
-
-        private void VotesPecentageByState()
-        {
-            var res = Data.GroupBy(r => r.State)
-                           .Select(
-                                group => new
-                                {
-                                    State = group.Key,
-                                    Results = group.OrderByDescending(p => p.Total)
-                                    .Take(3)
-                                })
-                           .ToList();
-
-
-            //var re1s = Data.GroupBy(r => r.State).Select(x => x.OrderByDescending(p => p.Total).Take(3)).ToArray();
-
-            foreach (var x in res)
-            {
-                Console.WriteLine(x.State);
-                foreach (var c in x.Results)
-                {
-                    Console.WriteLine(" - {0}", c);
-                }
-            }
         }
     }
 }
