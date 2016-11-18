@@ -9,6 +9,7 @@ This class is u
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 
 namespace P3
 {
@@ -120,7 +121,8 @@ namespace P3
         }
 
         /*************************************************************************
-         * Query used to find the percentage of vote for each state for a particular year
+         * Query used to find the percentage of vote for 
+         * each state for a particular year
          *************************************************************************/
         private void VotePercentageState()
         {
@@ -131,36 +133,41 @@ namespace P3
                           where c.Date.Year == year             //filter by year
                           group c by c.State                    //group by state
                           into pr                               
-                          select new                            //create a new object 
+                          select new                            //create a new object with state name and percentage
                           {
                               stateName = pr.Key,
                               stateDemPer = (Convert.ToDouble(pr.Sum(c => c.DemocratVote)) / Convert.ToDouble(pr.Sum(c => c.Total)) * 100),
                               stateRepPer = (Convert.ToDouble(pr.Sum(c => c.RepublicanVote)) / Convert.ToDouble(pr.Sum(c => c.Total)) * 100)
                           };
-            if (percent.Any())
+            if (percent.Any())                                  //if there is any result
             {
-                foreach (var per in percent)
+                foreach (var per in percent)                    //display each county
                     Console.WriteLine("{0,20} => Democrate: {1:0.00}%, Republican: {2:0.00}% Others: {3:0.00}%", per.stateName, per.stateDemPer, per.stateRepPer, 100 - (per.stateDemPer + per.stateRepPer));
             }
             else
                 Console.WriteLine("No Data for the year {0}", year);
         }
 
+        /*************************************************************************
+         * Query used to find the total number of votes for the 
+         * republican for a particular year
+         *************************************************************************/
         private void TotalRepublicanVotes()
         {
-            Console.Write("Input the year: ");
+            Console.Write("Input the year: ");                  //take the year chosen by the user
             var year = Convert.ToInt32(Console.ReadLine());
+
             var name = from  c in data
-                       where c.Date.Year == year
-                       group c by c.Republican into nm
+                       where c.Date.Year == year                //filter by year
+                       group c by c.Republican into nm          //group by Republican Candidate name
                        select nm.Key;
 
             var result = from n in data
                          where n.Date.Year == year
                          select n;
-            if (name.Any())
+            if (name.Any())                                     //if we have any result
             {
-                int num = result.Sum(r => r.RepublicanVote);
+                int num = result.Sum(r => r.RepublicanVote);    //sum the republican votes
 
                 Console.Write("In {0}, {1} people voted for ", year, num);
                 foreach (var s in name)
@@ -171,22 +178,27 @@ namespace P3
 
         }
 
+        /*************************************************************************
+         * Query used to find the total number of votes for democrats 
+         * for a particaular year
+         *************************************************************************/
         private void TotalDemocraticVotes()
         {
-            int year;
             Console.Write("Input the year: ");
-            year = Convert.ToInt32(Console.ReadLine());
+            int year = Convert.ToInt32(Console.ReadLine());     //take the year chosen by the user
+
             var name = from c in data
-                       where c.Date.Year == year
-                       group c by c.Democrat into nm
+                       where c.Date.Year == year                //filter by year
+                       group c by c.Democrat into nm            //group by Democrat Candidate name
                        select nm.Key;
 
             var result = from n in data
                          where n.Date.Year == year
                          select n;
-            if (name.Any())
+
+            if (name.Any())                                     //if we have any result
             {
-                int num = result.Sum(r => r.DemocratVote);
+                int num = result.Sum(r => r.DemocratVote);      //sum the democrat votes
 
                 Console.Write("In {0}, {1} persons voted for ", year, num);
                 foreach (var s in name)
@@ -195,12 +207,6 @@ namespace P3
             else
                 Console.WriteLine("No Data for the year {0}", year);
 
-        }
-
-        private int TotalVotes()
-        {
-            var result = data.Sum(r => r.Total);
-            return result;
         }
 
         private ElectionData WidestWinningMargin()
