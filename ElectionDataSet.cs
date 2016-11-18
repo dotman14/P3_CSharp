@@ -489,7 +489,7 @@ namespace P3
             switch (searchByVariable) //switch on th user choice
             {
                 case '1': //search by type of election
-                    Console.Write("\nSelect Office: Ex..(P)residential, (S)enate, (G)overnorship, (H)ouse of Rep: ");
+                    Console.Write("\nSelect Office: Ex..(P)resident, (S)enate, (G)overnorship, (H)ouse of Rep: ");
                     var office = Console.ReadLine(); //get the type of election from the user
                     Display.GetMainHeader(); //display the header
                     SearchByOffice(office); //search the entries and display them

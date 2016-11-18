@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataManipulation.cs" />
     <Compile Include="ElectionDataSet.cs" />
     <Compile Include="LinqQueries.cs" />
     <Compile Include="ReadCSV.cs" />

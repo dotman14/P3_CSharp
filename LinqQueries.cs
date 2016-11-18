@@ -2,8 +2,7 @@
 File Name:    LinqQueries.cs
 Project:      US Election Data by County
 
-This class is u
-
+This is a LINQ quey class. It runs all LINQ related queried.
 \***************************************************************************/
 
 using System;
