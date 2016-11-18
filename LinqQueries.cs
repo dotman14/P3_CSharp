@@ -209,6 +209,9 @@ namespace P3
 
         }
 
+        /*************************************************************************
+         * Query used to find the widdest wining margin
+         *************************************************************************/
         private ElectionData WidestWinningMargin()
         {
             var result =
@@ -219,6 +222,9 @@ namespace P3
             return data[result.index];
         }
 
+        /*************************************************************************
+         * Query used to find the smallest wining margin
+         *************************************************************************/
         private ElectionData SmallestWinningMargin()
         {
             var result =
@@ -229,6 +235,9 @@ namespace P3
             return data[result.index];
         }
 
+        /*************************************************************************
+         * Query used to find the top three vote in each state
+         *************************************************************************/
         private void VotesPecentageByState()
         {
             var res = data.GroupBy(r => r.State)
