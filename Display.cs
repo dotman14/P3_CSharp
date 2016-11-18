@@ -35,9 +35,9 @@ namespace P3
             Console.WriteLine("4. Smallest winning margin by any Candidate");
             Console.WriteLine("5. Votes percentage by State");
             Console.WriteLine("6. Votes percentage by Year");
-            Console.WriteLine("7. Percentage Voter Increase");
-            Console.WriteLine("8. Top 3 total votes in each State");
-            Console.WriteLine("9. County with the same name in different State");
+            Console.WriteLine("7. Top 3 total votes in each State");
+            Console.WriteLine("8. County with the same name in different State");
+            //Console.WriteLine("7. Percentage Voter Increase");
         }
 
         //search display function

@@ -2,8 +2,7 @@
 File Name:    Program.cs
 Project:      US Election Data by County
 
-
-
+This is the Main driver for the project.
 \***************************************************************************/
 
 using System;
@@ -28,7 +27,7 @@ namespace P3
                     try
                     {                                   //throw an exception if the input is invalid
                         getResponse = Convert.ToInt32(Console.ReadLine());
-                        if (!(getResponse >= 0 && getResponse <= 5))
+                        if (!(getResponse >= 0 && getResponse <= 6))
                             throw new ArgumentOutOfRangeException();
                     }
                     catch (Exception ex)

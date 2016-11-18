@@ -47,15 +47,14 @@ namespace P3
                     VotePercentageYear();
                     break;
                 case '7':
-                    //VotePercentageYear();
-                    break;
-                case '8':
                     Console.WriteLine();
                     VotesPecentageByState();
                     break;
-                case '9':
+                case '8':
                     SameNameCounty();
                     break;
+                //case '9':
+                    
                 default:
                     Console.WriteLine("That option does not exist.");
                     break;
