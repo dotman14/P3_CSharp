@@ -2,7 +2,8 @@
 File Name:    LinqQueries.cs
 Project:      US Election Data by County
 
-This is a LINQ quey class. It runs all LINQ related queried.
+This class is u
+
 \***************************************************************************/
 
 using System;
@@ -60,25 +61,29 @@ namespace P3
             }
         }
 
+        /************************************************************************** 
+         * Query to retrieve the county with the same name located 
+         * in different state
+         **************************************************************************/
         private void SameNameCounty()
         {
-            var duplicates = data
+            var duplicates = data               //find the duplicate county  
                 .GroupBy(s => s.Area)
                 .Where(s=>s.Count() > 1)
                 .SelectMany(grp => grp.Skip(0))
                 .OrderBy(s=>s.Area);
 
-            var distinct = duplicates
-                .GroupBy(p => p.Area)
+            var distinct = duplicates           //find the unique elements
+                .GroupBy(p => p.Area)           //from the precedent query
                 .Select(group => new {
                     county = group.Key,
                     count = group.Count()
                 });
 
-            foreach (var dist in distinct)
+            foreach (var dist in distinct)      //first foreach used to diplay the county name
             {
                 Console.WriteLine("{0} can be found in {1} States:",dist.county, dist.count);
-                foreach (var dup in duplicates)
+                foreach (var dup in duplicates) //second foreach used to display each duplicate of the county
                 {
                     if(dist.county == dup.Area)
                         Console.WriteLine("  - {0,8}",dup.State);
@@ -86,39 +91,47 @@ namespace P3
             }
         }
 
+        /*************************************************************************
+         * Query used to find the percentage of vote for each party
+         *************************************************************************/
         private void VotePercentageYear()
         {
-            Console.Write("Input the year: ");
+            Console.Write("Input the year: ");                  //take the year chosen by the user
             var year = Convert.ToInt32(Console.ReadLine());
-            var percentYear = from  c in data
-                              where c.Date.Year == year
-                              group c by c.Date.Year
+
+            var percentYear = from  c in data               
+                              where c.Date.Year == year         //filter the correspondant year
+                              group c by c.Date.Year            //group by the seleect year
                               into prYr
-                              select new
+                              select new                        //create a new objet with percentage
                               {
                                   year = prYr.Key,
                                   stateDemPer = (Convert.ToDouble(prYr.Sum(c => c.DemocratVote)) / Convert.ToDouble(prYr.Sum(c => c.Total)) * 100),
                                   stateRepPer = (Convert.ToDouble(prYr.Sum(c => c.RepublicanVote)) / Convert.ToDouble(prYr.Sum(c => c.Total)) * 100)
                               };
-            if (percentYear.Any())
+
+            if (percentYear.Any())                              //if there is any result
             {
-                foreach (var per in percentYear)
+                foreach (var per in percentYear)                //display it
                     Console.WriteLine("{0,6} => Democrate: {1:0.00}%, Republican: {2:0.00}%, Other Votes {3:0.00}%", per.year, per.stateDemPer, per.stateRepPer, 100 - (per.stateDemPer + per.stateRepPer));
             }
             else
                 Console.WriteLine("No Data for the year {0}", year);
         }
 
+        /*************************************************************************
+         * Query used to find the percentage of vote for each state for a particular year
+         *************************************************************************/
         private void VotePercentageState()
         {
-            int year;
-            Console.Write("Input the year: ");
-            year = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Input the year: ");                  //take the year chosen by the user
+            int year = Convert.ToInt32(Console.ReadLine());
+
             var percent = from c in data
-                          where c.Date.Year == year
-                          group c by c.State
-                          into pr
-                          select new
+                          where c.Date.Year == year             //filter by year
+                          group c by c.State                    //group by state
+                          into pr                               
+                          select new                            //create a new object 
                           {
                               stateName = pr.Key,
                               stateDemPer = (Convert.ToDouble(pr.Sum(c => c.DemocratVote)) / Convert.ToDouble(pr.Sum(c => c.Total)) * 100),
