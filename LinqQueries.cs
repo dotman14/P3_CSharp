@@ -1,20 +1,23 @@
 ﻿/****************************** File Header ******************************\
-Module Name:  Display.cs
+File Name:    LinqQueries.cs
 Project:      US Election Data by County
 
-This is a static class used across the project to 
-display well formatted headers and menu options.
+This class is u
 
 \***************************************************************************/
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace P3
 {
-    class Linq : ElectionDataSet
+    class LinqQueries
     {
-        public void LinQueries()
+        private static readonly ElectionDataSet Elect = new ElectionDataSet();
+        private readonly List<ElectionData> data = Elect.Data;
+
+        public void Queries()
         {
             Display.LinqOptions();
 
@@ -61,7 +64,7 @@ namespace P3
 
         private void SameNameCounty()
         {
-            var duplicates = Data
+            var duplicates = data
                 .GroupBy(s => s.Area)
                 .Where(s=>s.Count() > 1)
                 .SelectMany(grp => grp.Skip(0))
@@ -89,7 +92,7 @@ namespace P3
         {
             Console.Write("Input the year: ");
             var year = Convert.ToInt32(Console.ReadLine());
-            var percentYear = from  c in Data
+            var percentYear = from  c in data
                               where c.Date.Year == year
                               group c by c.Date.Year
                               into prYr
@@ -113,7 +116,7 @@ namespace P3
             int year;
             Console.Write("Input the year: ");
             year = Convert.ToInt32(Console.ReadLine());
-            var percent = from c in Data
+            var percent = from c in data
                           where c.Date.Year == year
                           group c by c.State
                           into pr
@@ -136,12 +139,12 @@ namespace P3
         {
             Console.Write("Input the year: ");
             var year = Convert.ToInt32(Console.ReadLine());
-            var name = from  c in Data
+            var name = from  c in data
                        where c.Date.Year == year
                        group c by c.Republican into nm
                        select nm.Key;
 
-            var result = from n in Data
+            var result = from n in data
                          where n.Date.Year == year
                          select n;
             if (name.Any())
@@ -162,12 +165,12 @@ namespace P3
             int year;
             Console.Write("Input the year: ");
             year = Convert.ToInt32(Console.ReadLine());
-            var name = from c in Data
+            var name = from c in data
                        where c.Date.Year == year
                        group c by c.Democrat into nm
                        select nm.Key;
 
-            var result = from n in Data
+            var result = from n in data
                          where n.Date.Year == year
                          select n;
             if (name.Any())
@@ -185,33 +188,33 @@ namespace P3
 
         private int TotalVotes()
         {
-            var result = Data.Sum(r => r.Total);
+            var result = data.Sum(r => r.Total);
             return result;
         }
 
         private ElectionData WidestWinningMargin()
         {
             var result =
-                Data.Select((r, i) => new { value = Math.Abs(r.DemocratVote - r.RepublicanVote), index = i }).
+                data.Select((r, i) => new { value = Math.Abs(r.DemocratVote - r.RepublicanVote), index = i }).
                     OrderByDescending(r => r.value).
                     FirstOrDefault();
 
-            return Data[result.index];
+            return data[result.index];
         }
 
         private ElectionData SmallestWinningMargin()
         {
             var result =
-               Data.Select((r, i) => new { value = Math.Abs(r.DemocratVote - r.RepublicanVote), index = i }).
+               data.Select((r, i) => new { value = Math.Abs(r.DemocratVote - r.RepublicanVote), index = i }).
                    OrderBy(r => r.value).
                    FirstOrDefault();
 
-            return Data[result.index];
+            return data[result.index];
         }
 
         private void VotesPecentageByState()
         {
-            var res = Data.GroupBy(r => r.State)
+            var res = data.GroupBy(r => r.State)
                            .Select(
                                 group => new
                                 {

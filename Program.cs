@@ -1,9 +1,8 @@
 ﻿/****************************** File Header ******************************\
-Module Name:  Display.cs
+File Name:    Program.cs
 Project:      US Election Data by County
 
-This is a static class used across the project to 
-display well formatted headers and menu options.
+
 
 \***************************************************************************/
 
@@ -17,8 +16,9 @@ namespace P3
         {
             try
             {
-                var manipulate = new DataManipulation();
-                var linq = new Linq();
+                var electionDataSet = new ElectionDataSet();
+                var linqQueries = new LinqQueries();
+
                 var response = false;
                 while (response == false)
                 {
@@ -39,22 +39,22 @@ namespace P3
                     switch (getResponse)                //return the action corresponding to the choice
                     {
                         case 0:                         //initializes and shows data
-                            manipulate.DisplayAllData();
+                            electionDataSet.DisplayAllData();
                             break;
                         case 1:                         //add a new entry
-                            manipulate.Add();
+                            electionDataSet.Add();
                             break;
                         case 2:                         //modify a specific entry
-                            manipulate.Modify();
+                            electionDataSet.Modify();
                             break;
                         case 3:                         //search a specific entry
-                            manipulate.Search();
+                            electionDataSet.Search();
                             break;
                         case 4:                         //display the number of entry
-                            Console.Write("Dataset count {0}\n\n", manipulate.Count);
+                            Console.Write("Dataset count {0}\n\n", electionDataSet.Count);
                             break;
                         case 5:                         //exit the program
-                            linq.LinQueries();
+                            linqQueries.Queries();
                             
                             break;
                         case 6:                         //exit the program

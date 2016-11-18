@@ -1,5 +1,5 @@
 ﻿/****************************** File Header ******************************\
-Module Name:  Display.cs
+File Name:    Display.cs
 Project:      US Election Data by County
 
 This is a static class used across the project to 

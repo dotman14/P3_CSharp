@@ -1,10 +1,9 @@
 ﻿/****************************** File Header ******************************\
-Module Name:  Display.cs
+File Name:    ElectionData.cs
 Project:      US Election Data by County
 
-This is a static class used across the project to 
-display well formatted headers and menu options.
 
+This is the main object being modified and queried in this project.
 \***************************************************************************/
 
 using System;
