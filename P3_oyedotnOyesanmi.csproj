@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ElectionDataSet.cs" />
+    <Compile Include="LinqQueries.cs" />
     <Compile Include="ReadCSV.cs" />
     <Compile Include="Display.cs" />
     <Compile Include="ElectionData.cs" />
