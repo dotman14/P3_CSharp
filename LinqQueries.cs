@@ -2,14 +2,12 @@
 File Name:    LinqQueries.cs
 Project:      US Election Data by County
 
-This class is u
-
+Class for all LINQ queries
 \***************************************************************************/
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
 
 namespace P3
 {
